@@ -22,7 +22,7 @@
 	z-index: 100;
 }
 
-/*.button1{
+.button1{
 	cursor: pointer;
 	position: left;
 	width: 5em;
@@ -71,7 +71,7 @@
 
 .button1:hover .line-3{
 	width: 40%;
-}*/
+}
 
 .logo{
 	font-size: 30px;
@@ -219,7 +219,7 @@
 	}
 
 
-/*.footer{
+.footer{
 	position:fixed;
 	bottom: 0;
 	left:0 ;
@@ -231,7 +231,7 @@
 	justify-content:space-between ;
 	align-items:center ;
 	z-index:100 ;
-}*/
+}
 
 
 
