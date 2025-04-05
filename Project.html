@@ -321,90 +321,6 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             margin-right: 8px;
         }
 
-        /* Calendar and Schedule Section 
-        .upcoming-section {
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2d3748;
-        }
-
-        .view-all {
-            color: #4299e1;
-            font-size: 14px;
-            text-decoration: none;
-        }
-
-        .event-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .event-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border-radius: 8px;
-            background-color: #f8fafc;
-            transition: transform 0.2s;
-        }
-
-        .event-item:hover {
-            transform: translateX(5px);
-        }
-
-        .event-date {
-            width: 50px;
-            height: 50px;
-            background-color: #4299e1;
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-weight: 700;
-        }
-
-        .event-day {
-            font-size: 18px;
-        }
-
-        .event-month {
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .event-details {
-            flex-grow: 1;
-        }
-
-        .event-title {
-            font-weight: 600;
-            margin-bottom: 3px;
-            color: #2d3748;
-        }
-
-        .event-time {
-            font-size: 13px;
-            color: #718096;
-        }*/
 
         /* Navigation Menu with Visual Indicators */
         .nav-menu {
@@ -459,6 +375,15 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             justify-content: center;
             font-size: 16px;
         }
+         /* Mobile Menu */
+         .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+         }
 
         /* Utility Classes */
         .divider {
@@ -468,6 +393,158 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         .logout-button {
             color: #e53e3e;
         }
+
+
+    /*Media Queries*/    
+  @media (max-width: 992px){
+    .layout-container{
+        flex-direction:column
+    }
+    .sidebar{
+        width:100%;
+        margin-bottom:20px;
+    }
+    .nav-menu{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-between;     
+    }
+    .nav-item{
+        flex: 1 0 30%;
+        justify-content: center;
+        text-align:center ;
+        border-bottom: none;
+        border-right: 1px solid #edf2f7;
+        margin-bottom: 1px;
+    }
+    .nav-item-icon{
+        margin-right: 8px;
+    }
+
+  }
+
+  @media(max-width:768)
+  {
+            .course-header, .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .badge, .view-all {
+                margin-top: 10px;
+            }
+            
+            .profile-stats {
+                flex-wrap: wrap;
+            }
+            
+            .stat-item {
+                flex: 1 0 45%;
+                margin-bottom: 10px;
+            }
+            
+            .nav-item {
+                flex: 1 0 45%;
+            }
+            
+            .menu-button {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .menu-container {
+                display: none;
+            }
+            
+            .nav-actions {
+                gap: 10px;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .profile-stats {
+                flex-direction: column;
+            }
+            
+            .stat-item {
+                flex: 1 0 100%;
+            }
+            
+            .nav-item {
+                flex: 1 0 100%;
+            }
+            
+            .layout-container {
+                padding: 0 10px;
+                margin: 15px auto;
+            }
+            
+            .profile-card, .learning-progress, .upcoming-section {
+                padding: 15px;
+            }
+            
+            .course-title, .section-title {
+                font-size: 16px;
+            }
+        }
+        /* Mobile Navigation Menu */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: block;
+            
+            body {
+                padding-bottom: 60px;
+            }
+        }
+      }
     </style>
 </head>
 <body>
@@ -477,6 +554,7 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             <div class="logo-icon">C</div>
             CodingCompanion
         </div>
+        <button class="mobile-menu-toggle">☰</button>
         <div class="menu-container">
             <button class="menu-button">Explore</button>
         </div>
