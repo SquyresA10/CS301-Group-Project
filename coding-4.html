@@ -1,0 +1,355 @@
+<DOCTYPE html>
+  <html lang="eng">
+  <head>
+    <meta charset="UTF"-8>
+    <meta name = "viewport" content="width = device width,initial-scale=1">
+    <title>E-LEARNING PLATFORM</title>
+    <style>
+      *{
+  margin:0 ;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif ;
+  text-decoration: none;
+  list-style: none ;
+  background color:#1a365d ;
+}
+body{
+  background-image: url("cppimage.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position:center,top left ;
+}
+
+.header{
+  margin-bottom: 0;
+  position: fixed ;
+  top: 0;
+  left:0 ;
+  width: 100% ;
+  padding: 10px 5px;
+  background:#1a365d;
+  backdrop-filter: blur(10px) ;
+  display: flex;
+  justify-content: space-between ;
+  align-items: center;
+  z-index: 70;
+  gap: 20px;
+}
+
+.logo{
+  display:flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color:#2d5bb9;
+}
+
+.logo-icon{
+  width:32px;
+  height:32px;
+  background-color: #4299e1;
+  font-size: 18px;
+  font-weight:800 ;
+  margin-right: 10px;
+  border-radius:8px;
+  display:flex;
+  align-items:center ;
+  justify-content: center;
+
+}
+.navbar{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.navbar a{
+  font-size: 14px;
+  color:white;
+  font-weight: 300;
+  margin: 0;
+  border-bottom:3px solid transparent;
+  transition: 0.3s ease;
+}
+
+.navbar a:hover
+{
+  color:skyblue ;
+  border-bottom: 3px solid skyblue;
+  color: #4299e1;
+    transform:scale(1.1);
+}
+
+.menu-button{
+  background: rgba(255,255,255, 0.1);
+  border:none;
+  font-size: 16px;
+  font-weight: 500;
+  color:white;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  padding:8px 15px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.menu-button:hover{
+  background: rgba(255,255,255, 0.2);
+}
+
+.menu-button:after{
+  content:"\203A"; /*Unicode for black own pointing triangle*/
+  font-size: 18px;
+  transform:rotate(90deg);
+  display:inline-block;
+  margin-left: 8px;
+}
+
+
+.description{
+  color: #1a365d;
+    height: 100x;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1500px;
+
+  /*padding: 12% 0;*/
+}
+.description-content h1{
+  color: #1a365d;
+  font-size: 20px;
+  text-align: center;
+}
+
+.description-content h2{
+  color: #1a365d;
+  font-size: 20px;
+  text-align: center;
+}
+
+.paragraph{
+  font-family: sans-serif;
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #1a365d;
+  text-align: center;
+  margin: 10px auto;
+  max-width: 600px;
+}
+
+.home{
+  color: #1a365d;
+  padding-top: 100px;
+  padding-bottom: 70px;
+    height: 100x;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1500px;
+
+}
+
+.welcome-section{
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: none;
+  padding-left: 20px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 0;
+}
+
+.welcome-section h1,.welcome-section h2,.welcome-section p{
+    font-size: 27px;
+  padding: ;
+  margin-top: 2px;
+  margin-bottom: none;
+  font: times monospace;
+  animation: bounce 1.5s infinite alternate;
+  color: #1a365d;
+  font-weight: 600;
+  transition: 0.3s ease;
+  color: black;
+  text-shadow: 0 0 25px black;
+    transform:scale(1.1);
+  transition: 0.3s ease;
+}
+.welcome-section h1{
+  color: #1a365d;
+    padding:0 ;
+     margin-bottom: 5px;
+     animation-delay: 0.5s;
+}
+.welcome-section h2{
+  color: #1a365d;
+  animation-delay: 0.5s;
+}
+.welcome-section p{
+  color: #1a365d;
+  animation-delay: 0.5s;
+}
+@keyframes bounce{
+  0%{
+    transform: translateY(0);
+  }
+  100%{
+    transform: translateY(-10px);
+  }
+}
+
+.summary{
+  width: 100%;
+  display:flex;
+  algn-items:center;
+  padding-top: 40px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.summary-content a {
+  font-size: 20px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color: black;
+  font-weight: 600;
+  transition: 0.3s ease;
+
+}
+
+.summary a:hover{
+  color:black;
+  text-shadow: 0 0 25px blue,
+               0 0 50px blue;
+    transform:scale(1.1);
+}
+strong{
+  color:  #007bff;
+}
+
+@media(max-width:768px){
+  .header{
+    flex-direction:row;
+    align-items: center;
+    padding: 10px;
+  }
+  .logo{
+    font-size: 1.2em;
+  }
+  .navbar{
+    flex-direction:row;
+    align-items: center;
+    width: auto;
+    gap: 10px;
+    display: flex;
+  }
+
+   .menu-container{
+     margin-bottom: 0;
+    }
+.menu-button{
+  display: inline-block;
+  width: auto;
+  text-align: left;
+  margin-bottom: 0;
+  padding: 8px 10px;
+}
+.navbar a{
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0;
+  padding: 8px 10px;
+}
+
+}
+
+@media(max-width:480px){
+  .welcome-section h1{
+    font-size: 1.7em;
+
+  }
+
+  .welcome-section{
+    font-size: 1.3em;
+  }
+
+}
+
+    </style>
+  </head>
+      <body>
+        <header class="header">
+
+
+           <div class="logo">
+            <div class="logo-icon">C</div>
+            CodingCompanion
+        </div>
+         <nav class="navbar">
+
+        <div class="menu-container">
+            <button class="menu-button">Explore</button>
+        </div>
+                 
+                      <a href="signup">SIGN UP</a>
+                      <a href="signin">SIGN IN</a>
+                    </nav>
+
+                       
+          </header>
+          <section class="home">
+  
+            <div class="welcome-section">
+
+            <h1>START YOUR</h1>
+            <h2>C++ ADVENTURE</h2>
+            <br>
+            <p>The most fun and beginner-friendly way
+           to learn programming fundamentals</p>
+          </div>
+        </section>
+
+        <section class="description">
+          
+        <div class="description-content">
+          <h2> JOURNEY THROUGH THE WORLD OF C++</h2>
+          <p class="paragraph"> Learn programming fundamentals such as variables,control flow,functions and loops with interactive and handcrafted exercises</p>
+        </section>
+  
+        <section class="summary">
+          <div class="summary-content">
+            <strong>PRACTICE</strong>
+            <br>
+            <a href="challenges">Challenges</a>
+            <br>
+                      <a href="projects">Projects</a>
+                      <br>
+                      <strong>LEARN</strong>
+                      <br>
+            <a href="allcourses">All Courses</a>
+            <br>
+                      <a href="functions">Functions</a>
+                      <br>
+                      <a href="datatypes">DataTypes</a>
+                      <br>
+                      <a href="files">Files</a>
+                      <br>
+                      <a href="classes">Classes</a>
+                      <br>
+                      <a href="expressionsandstatments">Expressions and Statements</a>
+                      <br>
+                      <a href="about"><strong>About</strong></a>
+                      <br>
+                      <a href="help"><strong>Help</strong></a>
+ 
+          </div>
+
+
+      </body> 
+    </html>
