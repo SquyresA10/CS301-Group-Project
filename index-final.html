@@ -1,0 +1,121 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Code Buddy</title>
+        <link rel="stylesheet" href="front-final.css">
+    </head>
+    <body>
+        <!-- Hidden checkbox for toggle functionality -->
+    <input type="checkbox" id="sidebarToggle">
+    
+    <!-- Navbar with menu toggle on far left -->
+    <nav class="navbar">
+        <label for="sidebarToggle" class="menu-toggle">☰</label>
+        <div class="logo">
+            <div class="logo-icon">C</div>
+            CodeBuddy
+        </div>
+        <!--<div class="menu-container">
+            <button class="menu-button">Explore</button>
+        </div>-->
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search here" class="search-input">
+       </div>
+        <div class="nav-actions">
+            <!--<button class="action-button">🔔</button>-->
+            <div class="profile-icon">CP</div>
+        </div>
+    </nav>
+
+    <!-- Main Layout with Sidebar -->
+    <div class="layout-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- Navigation Menu -->
+            <div class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <div class="nav-item-icon">📊</div>
+                    Analytics Hub
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">📚</div>
+                    My Learning
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🗂️</div>
+                    Resource Library
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🏅</div>
+                    Achievements
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">⚙️</div>
+                    Preferences
+                </a>
+                <a href="#" class="nav-item logout-button">
+                    <div class="nav-item-icon">🚪</div>
+                    Sign Out
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Profile Section -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">CP</div>
+                    <div class="profile-details">
+                        <h1>Chali Ponshano</h1>
+                        <a href="#" class="edit-profile">
+                            <span>Customize profile</span> ›
+                        </a>
+                    </div>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">14</div>
+                        <div class="stat-label">Courses Started</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">86%</div>
+                        <div class="stat-label">Average Score</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Progress Section -->
+            <div class="learning-progress">
+                <div class="course-header">
+                    <h2 class="course-title">Programming Fundamentals</h2>
+                    <span class="badge">In Progress</span>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span>Progress</span>
+                        <span>5% Completed</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="current-module">
+                    <div class="module-label">Current Module</div>
+                    <div class="module-title">Introduction to Coding Concepts</div>
+                </div>
+            </div>  
+        </div>
+    </div>
+    </body>
+    </html>
