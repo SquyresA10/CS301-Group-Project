@@ -1,0 +1,158 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Companion </title>
+    <link rel="stylesheet" href="{% static 'index.css'%}">
+    
+    <style>    
+        .auth-container {
+            width: 100%;
+            min-height: 100vh;
+            background: whitesmoke;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 20px 60px;
+        }
+
+        .auth-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 10px;
+        }
+
+        .auth-title {
+            font-size: 32px;
+            color: #007bff;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            color: #444;
+            font-weight: 300;
+        }
+
+        .input-group input {
+            padding: 12px 18px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .auth-toggle a {
+            color: #007bff;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        .auth-toggle a:hover {
+            color: #0056b3;
+        }
+
+        .auth-button {
+            background: #007bff;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .auth-button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .name-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .name-group > div {
+            flex: 1;
+        }
+
+        @media (max-width: 480px) {
+            .name-group {
+                flex-direction: column;
+            }
+            
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .auth-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">CODING COMPANION</div>
+        <nav class="navbar">
+            <a href=".">  GO BACK HOME</a>
+        </nav>
+    </header>
+    
+    <section class="auth-container" id="login">
+        <div class="auth-card">
+            <h2 class="auth-title">Log In</h2>
+            <form method="POST" action="." class="auth-form">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="auth-button">Log In</button>
+            </form>
+            <div class="auth-toggle">
+                Don't have an account? <a href="{% url 'register'%}">Sign Up</a>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+</html>

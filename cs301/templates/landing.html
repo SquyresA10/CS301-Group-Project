@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to CodeBuddy</title>
+    <link rel="stylesheet" href="{% static 'front-final.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">C</div>
+            CodeBuddy
+        </div>
+        <div class="nav-actions">
+            <a href="{% url 'login' %}" class="action-button">Login</a>
+            <a href="{% url 'login' %}" class="action-button">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to CodeBuddy</h1>
+            <p class="hero-subtitle">An adaptive E-learning platform built for first-year students learning C++.</p>
+            <div class="hero-buttons">
+                <a href="{% url 'login' %}" class="cta-button">Get Started</a>
+                <a href="{% url 'login' %}" class="secondary-button">Login</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="feature">
+            <div class="feature-icon">📘</div>
+            <h3>Structured Learning Paths</h3>
+            <p>Progress through tailored modules that match your current knowledge level.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🧠</div>
+            <h3>Smart Feedback</h3>
+            <p>Receive intelligent feedback and recommendations based on your performance.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Goal Tracking</h3>
+            <p>Set learning goals and track your course progress with visual analytics.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 CodeBuddy. All rights reserved.</p>
+    </footer>
+</body>
+</html>
