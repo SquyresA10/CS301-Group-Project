@@ -2,11 +2,13 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-def index(request):
-    return render(request, 'index-final.html')
+@login_required
+def home(request):
+    return render(request, 'home.html')
 
 #Registration view
 def register(request):
@@ -47,7 +49,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Logged in successfully")
-            return redirect("index")
+            return redirect("home")
         else: 
             messages.info(request, "Wrong username or password")
             return render(request, "login.html")          
@@ -55,4 +57,9 @@ def login_view(request):
 
 #This is a logout view that handles user logout.
 def logout_view(request):
-    return render(request, 'logout.html')
+    logout(request)
+    return redirect('landingPage')
+
+#Landing page view
+def landingPage(request):
+    return render(request, 'landingPage.html')

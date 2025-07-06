@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'users.middleware.CustomMiddleware',  # Custom middleware for cache control
 ]
 
 ROOT_URLCONF = 'cs301.urls'
@@ -124,6 +125,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+LOGIN_URL = '/login/'
 
 
 # Default primary key field type

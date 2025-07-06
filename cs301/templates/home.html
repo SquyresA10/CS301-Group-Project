@@ -57,7 +57,7 @@
                     <div class="nav-item-icon">⚙️</div>
                     Preferences
                 </a>
-                <a href="#" class="nav-item logout-button">
+                <a href="{% url 'logout' %}" class="nav-item logout-button">
                     <div class="nav-item-icon">🚪</div>
                     Sign Out
                 </a>
@@ -71,7 +71,10 @@
                 <div class="profile-header">
                     <div class="profile-avatar">CP</div>
                     <div class="profile-details">
-                        <h1>Chali Ponshano</h1>
+                        <h1>{%if user.is_authenticated%}
+                            {{user.first_name}} {{user.last_name}}
+                            {%endif%}
+                        </h1>
                         <a href="#" class="edit-profile">
                             <span>Customize profile</span> ›
                         </a>
