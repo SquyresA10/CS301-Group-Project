@@ -27,7 +27,7 @@
        </div>
         <div class="nav-actions">
             <!--<button class="action-button">🔔</button>-->
-            <div class="profile-icon">CP</div>
+            <div class="profile-icon">{{user.first_name|slice:":1"}}{{user.last_name|slice:":1"}}</div>
         </div>
     </nav>
 
@@ -121,5 +121,6 @@
             </div>  
         </div>
     </div>
+    
     </body>
     </html>

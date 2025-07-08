@@ -123,6 +123,15 @@
             }
         }
     </style>
+   <script>
+            window.onload = function() {
+                var forms = document.getElementsById('form');
+                for (var i = 0; i < forms.length; i++) {
+                    forms[i].reset();
+                }
+            };
+</script>
+
 </head>
 <body>
     <header class="header">
@@ -135,7 +144,7 @@
     <section class="auth-container" id="login">
         <div class="auth-card">
             <h2 class="auth-title">Log In</h2>
-            <form method="POST" action="." class="auth-form">
+            <form method="POST" action="." id="form" class="auth-form">
                 {% csrf_token %}
                 <div class="input-group">
                     <label>Username</label>
