@@ -18,6 +18,11 @@ class LearningMaterial(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField(help_text="Main lesson content in text")
     is_adaptive = models.BooleanField(default=False)
+    sequence = models.PositiveIntegerField(default=1)
+    position = models.PositiveIntegerField(default=0) 
+    
+    class Meta:
+        ordering = ['sequence'] 
 
     def __str__(self):
         return self.title    

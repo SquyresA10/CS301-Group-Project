@@ -4,11 +4,14 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+from learning.models import LearningMaterial
+
 
 # Create your views here.
 @login_required
-def home(request):
-    return render(request, 'home.html')
+def dashboard(request):
+    first_lesson = LearningMaterial.objects.first()
+    return render(request, 'dashboard.html',{'first_lesson': first_lesson})
 
 #Registration view
 def register(request):
@@ -49,7 +52,9 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Logged in successfully")
-            return redirect("home")
+            first_lesson = LearningMaterial.objects.order_by('sequence').first()
+            if first_lesson:
+                return redirect('learning_home', lesson_id=first_lesson.id)
         else: 
             messages.info(request, "Wrong username or password")
             return render(request, "login.html")          

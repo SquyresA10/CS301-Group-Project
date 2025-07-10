@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.variable_view, name='variableAndConstantView'),
+    path('lesson/<int:lesson_id>', views.learn_home, name='learning_home'),
     #path('course/<int:course_id>/', views.course_detail, name='course_detail'),
     #path('course/<int:course_id>/enroll/', views.enroll_in_course, name='enroll_in_course'),
     #path('course/<int:course_id>/complete/', views.complete_course, name='complete_course'),

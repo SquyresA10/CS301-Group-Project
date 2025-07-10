@@ -620,8 +620,8 @@
         </div>
         <nav class="navbar">
             <a href="enhanced-index.html">Home</a>
-            <a href="enhanced-dashboard.html">Dashboard</a>
-            <a href="#courses">Courses</a>
+            <a href="{%url 'dashboard'%}">Dashboard</a>
+            <!--<a href="#courses">Courses</a>-->
             <a href="#progress">Progress</a>
         </nav>
     </header>
@@ -629,15 +629,12 @@
     <div class="main-container">
         <!-- Lesson Sidebar -->
         <aside class="lesson-sidebar">
-            <h3 class="lesson-nav-title">C++ Fundamentals</h3>
-            <a href="#intro" class="lesson-nav-item completed">Introduction to C++</a>
-            <a href="#variables" class="lesson-nav-item active">Variables & Constants</a>
-            <a href="#datatypes" class="lesson-nav-item">Data Types</a>
-            <a href="#operators" class="lesson-nav-item">Operators</a>
-            <a href="#control" class="lesson-nav-item">Control Structures</a>
-            <a href="#functions" class="lesson-nav-item">Functions</a>
-            <a href="#arrays" class="lesson-nav-item">Arrays</a>
-            <a href="#pointers" class="lesson-nav-item">Pointers</a>
+             {% for material in cpp_materials %}
+                <a href="{% url 'learning_home' material.id %}" 
+                    class="lesson-nav-item {% if material.id == current_material.id %}active{% endif %}">
+                    {{ material.title }}
+                </a>
+    {% endfor %}
 
             <div class="lesson-progress">
                 <div class="progress-header">
@@ -651,275 +648,21 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="lesson-content">
-            <!-- Lesson Header -->
-            <div class="lesson-header">
-                <h1 class="lesson-title">Variables & Constants</h1>
-                <p class="lesson-subtitle">Learn how to store and manage data in C++ programs</p>
-                <div class="lesson-meta">
-                    <div class="meta-item">
-                        <span>⏱️</span>
-                        <span>15 minutes</span>
-                    </div>
-                    <div class="meta-item">
-                        <span>📊</span>
-                        <span>Beginner Level</span>
-                    </div>
-                    <div class="meta-item">
-                        <span>🎯</span>
-                        <span>5 Exercises</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Introduction Section -->
-            <section class="content-section">
-                <h2 class="section-title">
-                    <span class="section-icon">📝</span>
-                    What are Variables?
-                </h2>
-                <p class="content-text">
-                    Variables are containers that store data values. In C++, every variable has a specific type that determines what kind of data it can hold and how much memory it occupies. Think of variables as labeled boxes where you can store different types of information.
-                </p>
-                
-                <div class="info-box tip">
-                    <div class="info-box-title">
-                        <span>💡</span>
-                        Key Concept
-                    </div>
-                    <p>A variable in C++ must be declared with a specific data type before it can be used. This tells the compiler how much memory to allocate and what operations are allowed on that variable.</p>
-                </div>
-            </section>
-
-            <!-- Variable Declaration Section -->
-            <section class="content-section">
-                <h2 class="section-title">
-                    <span class="section-icon">🔧</span>
-                    Declaring Variables
-                </h2>
-                <p class="content-text">
-                    To declare a variable in C++, you need to specify the data type followed by the variable name. You can also initialize the variable with a value at the time of declaration.
-                </p>
-
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-title">Variable Declaration Syntax</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <div class="code-content">
-<pre><span class="comment">// Basic variable declaration</span>
-<span class="type">int</span> <span class="variable">age</span>;                    <span class="comment">// Declaration only</span>
-<span class="type">int</span> <span class="variable">score</span> = <span class="number">95</span>;            <span class="comment">// Declaration with initialization</span>
-
-<span class="comment">// Multiple variables of same type</span>
-<span class="type">int</span> <span class="variable">x</span>, <span class="variable">y</span>, <span class="variable">z</span>;              <span class="comment">// Multiple declarations</span>
-<span class="type">int</span> <span class="variable">a</span> = <span class="number">10</span>, <span class="variable">b</span> = <span class="number">20</span>, <span class="variable">c</span> = <span class="number">30</span>; <span class="comment">// Multiple with initialization</span></pre>
-                    </div>
-                </div>
-
-                <div class="info-box warning">
-                    <div class="info-box-title">
-                        <span>⚠️</span>
-                        Important Rule
-                    </div>
-                    <p>In C++, you must declare a variable before using it. Using an uninitialized variable can lead to unpredictable behavior!</p>
-                </div>
-            </section>
-
-            <!-- Variable Types Section -->
-            <section class="content-section">
-                <h2 class="section-title">
-                    <span class="section-icon">🏷️</span>
-                    Common Variable Types
-                </h2>
-                <p class="content-text">
-                    C++ provides several built-in data types for different kinds of data. Here are the most commonly used ones:
-                </p>
-
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-title">Common Data Types</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <div class="code-content">
-<pre><span class="comment">// Integer types</span>
-<span class="type">int</span> <span class="variable">studentCount</span> = <span class="number">25</span>;        <span class="comment">// Whole numbers</span>
-<span class="type">long</span> <span class="variable">population</span> = <span class="number">7800000000</span>;  <span class="comment">// Large whole numbers</span>
-
-<span class="comment">// Floating-point types</span>
-<span class="type">float</span> <span class="variable">temperature</span> = <span class="number">98.6f</span>;     <span class="comment">// Single precision decimal</span>
-<span class="type">double</span> <span class="variable">pi</span> = <span class="number">3.14159265359</span>;    <span class="comment">// Double precision decimal</span>
-
-<span class="comment">// Character and string types</span>
-<span class="type">char</span> <span class="variable">grade</span> = <span class="string">'A'</span>;             <span class="comment">// Single character</span>
-<span class="type">string</span> <span class="variable">name</span> = <span class="string">"John Doe"</span>;      <span class="comment">// Text string</span>
-
-<span class="comment">// Boolean type</span>
-<span class="type">bool</span> <span class="variable">isStudent</span> = <span class="keyword">true</span>;       <span class="comment">// True or false</span></pre>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Interactive Exercise -->
-            <section class="content-section">
-                <h2 class="section-title">
-                    <span class="section-icon">💻</span>
-                    Try It Yourself
-                </h2>
-                <p class="content-text">
-                    Practice declaring and initializing variables. Try modifying the code below and click "Run" to see the output:
-                </p>
-
-                <div class="interactive-editor">
-                    <div class="editor-header">
-                        <span class="editor-title">Interactive C++ Editor</span>
-                        <button class="run-btn" onclick="runCode()">Run Code</button>
-                    </div>
-                    <div class="editor-content">
-                        <textarea class="code-input" id="codeInput">#include <iostream>
-#include <string>
-using namespace std;
-
-int main() {
-    // Declare and initialize variables
-    int age = 20;
-    string name = "Alice";
-    double height = 5.6;
-    bool isStudent = true;
-    
-    // Display the variables
-    cout << "Name: " << name << endl;
-    cout << "Age: " << age << endl;
-    cout << "Height: " << height << " feet" << endl;
-    cout << "Is Student: " << isStudent << endl;
-    
-    return 0;
-}</textarea>
-                        <div class="output-panel" id="outputPanel">
-Click "Run Code" to see the output...
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Constants Section -->
-            <section class="content-section">
-                <h2 class="section-title">
-                    <span class="section-icon">🔒</span>
-                    Constants
-                </h2>
-                <p class="content-text">
-                    Constants are variables whose values cannot be changed after they are initialized. They are useful for storing values that should remain the same throughout your program, like mathematical constants or configuration values.
-                </p>
-
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-title">Declaring Constants</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <div class="code-content">
-<pre><span class="comment">// Using const keyword</span>
-<span class="keyword">const</span> <span class="type">double</span> <span class="variable">PI</span> = <span class="number">3.14159</span>;
-<span class="keyword">const</span> <span class="type">int</span> <span class="variable">MAX_STUDENTS</span> = <span class="number">30</span>;
-<span class="keyword">const</span> <span class="type">string</span> <span class="variable">SCHOOL_NAME</span> = <span class="string">"CodingCompanion Academy"</span>;
-
-<span class="comment">// Using #define preprocessor directive</span>
-<span class="keyword">#define</span> <span class="variable">SPEED_OF_LIGHT</span> <span class="number">299792458</span>
-
-<span class="comment">// Constants must be initialized when declared</span>
-<span class="keyword">const</span> <span class="type">int</span> <span class="variable">DAYS_IN_WEEK</span> = <span class="number">7</span>;  <span class="comment">// ✓ Correct</span>
-<span class="comment">// const int MONTHS_IN_YEAR;     // ✗ Error: must initialize</span></pre>
-                    </div>
-                </div>
-
-                <div class="info-box important">
-                    <div class="info-box-title">
-                        <span>🚨</span>
-                        Remember
-                    </div>
-                    <p>Constants must be initialized when they are declared, and their values cannot be modified later in the program. Attempting to change a constant's value will result in a compilation error.</p>
-                </div>
-            </section>
-
-            <!-- Variable Naming Rules -->
-            <section class="content-section">
-                <h2 class="section-title">
-                    <span class="section-icon">📋</span>
-                    Variable Naming Rules
-                </h2>
-                <p class="content-text">
-                    C++ has specific rules for naming variables. Following these rules and conventions makes your code more readable and maintainable:
-                </p>
-
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-title">Valid and Invalid Variable Names</span>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                    </div>
-                    <div class="code-content">
-<pre><span class="comment">// Valid variable names</span>
-<span class="type">int</span> <span class="variable">age</span>;              <span class="comment">// Simple name</span>
-<span class="type">int</span> <span class="variable">student_count</span>;   <span class="comment">// Using underscore</span>
-<span class="type">int</span> <span class="variable">maxScore</span>;        <span class="comment">// CamelCase</span>
-<span class="type">int</span> <span class="variable">_private</span>;        <span class="comment">// Starting with underscore</span>
-<span class="type">int</span> <span class="variable">value2</span>;          <span class="comment">// Ending with number</span>
-
-<span class="comment">// Invalid variable names</span>
-<span class="comment">// int 2value;           // Cannot start with number</span>
-<span class="comment">// int student-count;    // Cannot use hyphen</span>
-<span class="comment">// int class;            // Cannot use keywords</span>
-<span class="comment">// int my variable;      // Cannot have spaces</span></pre>
-                    </div>
-                </div>
-
-                <div class="info-box tip">
-                    <div class="info-box-title">
-                        <span>💡</span>
-                        Best Practices
-                    </div>
-                    <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li>Use descriptive names: <code>studentAge</code> instead of <code>a</code></li>
-                        <li>Use camelCase for variables: <code>firstName</code>, <code>totalScore</code></li>
-                        <li>Use UPPER_CASE for constants: <code>MAX_SIZE</code>, <code>PI</code></li>
-                        <li>Avoid using single letters except for loop counters</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Quiz Section -->
-            <section class="quiz-section">
-                <h2 class="quiz-title">🧠 Test Your Knowledge</h2>
-                <div class="quiz-question">
-                    Which of the following is the correct way to declare a constant in C++?
-                </div>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="selectOption(this, false)">
-                        <code>constant int MAX_SIZE = 100;</code>
-                    </div>
-                    <div class="quiz-option" onclick="selectOption(this, true)">
-                        <code>const int MAX_SIZE = 100;</code>
-                    </div>
-                    <div class="quiz-option" onclick="selectOption(this, false)">
-                        <code>int const MAX_SIZE;</code>
-                    </div>
-                    <div class="quiz-option" onclick="selectOption(this, false)">
-                        <code>final int MAX_SIZE = 100;</code>
-                    </div>
-                </div>
-                <button class="quiz-submit" onclick="submitQuiz()" disabled>Submit Answer</button>
-                <div class="quiz-feedback" id="quizFeedback" style="display: none;"></div>
-            </section>
-
-            <!-- Navigation -->
-            <div class="lesson-navigation">
-                <button class="nav-btn prev" onclick="previousLesson()">
-                    ← Previous: Introduction to C++
-                </button>
-                <button class="nav-btn next" onclick="nextLesson()">
-                    Next: Data Types →
-                </button>
-            </div>
-        </main>
+    <main class="lesson-content">    
+        {{lesson.content|safe}}
+        <div class="lesson-navigation">
+            {% if prev_lesson %}
+                <a class="nav-btn prev" href="{% url 'learning_home' prev_lesson.id %}">
+                    ← Previous: {{ prev_lesson.title }}
+                </a>
+            {% endif %}
+            {% if next_lesson %}
+                <a class="nav-btn next" href="{% url 'learning_home' next_lesson.id %}">
+                    Next: {{ next_lesson.title }} →
+                </a>
+            {% endif %}
+        </div>
+    </main>
     </div>
 
     <script>
