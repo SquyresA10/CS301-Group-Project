@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C++ Operators - Programming Foundations | CodingCompanion</title>
+
+<style>
+/*Reset and Base Styles*/
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+}
+body {
+    background-color: #f0f2f5;
+    color:#1e293b;  
+    line-height: 1.6;
+}
+
+/*Navigation Bar*/
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items: center;
+padding: 15px 25px;
+background-color:#1a365d;
+color: white;
+box-shadow: 0 4px 12px rgba(0,0,0, 0.1);
+position:relative;
+}
+
+.logo{
+  display:flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color:white;
+}
+
+.logo-icon{
+  width:32px;
+  height:32px;
+  background-color: #4299e1;
+  font-size: 18px;
+  font-weight:800;
+  margin-right: 10px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+
+.menu-button{
+  background: rgba(255,255,255, 0.1);
+  border:none;
+  font-size: 16px;
+  font-weight: 500;
+  color:white;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  padding:8px 15px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.menu-button:hover{
+  background: rgba(255,255,255, 0.2);
+}
+
+.menu-button:after{
+  content:"\203A"; /*Unicode for black own pointing triangle*/
+  font-size: 18px;
+  transform:rotate(90deg);
+  display:inline-block;
+  margin-left: 8px;
+}
+
+.nav-actions{
+  display:flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.action-button{
+  background: none;
+  border:none;
+  font-size: 18px;
+  color:white;
+  cursor:pointer;
+  width: 35px;
+  height: 35px;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  transition: background-color 0.2s
+}
+.action-button:hover{
+  background: rgba(255,255,255, 0.1);
+}
+
+.profile-icon{
+  width:40px;
+  height: 40px;
+  background-color: #4299e1;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor: pointer;
+  font-weight:bold;
+  font-size:16px;
+}
+
+/*Main Container*/
+
+.layout-container{
+  display:flex;
+  max-width:1200px;
+  margin: 25px auto;
+  gap: 25px;
+  padding: 0 20px;
+}
+.sidebar{
+  width:240px;
+  flex-shrink: 0;
+}
+.main-content{
+  flex-grow:1;
+}
+
+/* Navigation Menu with Visual Indicators */
+.nav-menu {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.nav-item:not(:last-child) {
+    border-bottom: 1px solid #edf2f7;
+}
+
+.nav-item:hover {
+    background-color: #f8fafc;
+    color: #4299e1;
+}
+
+.nav-item.active {
+    background-color: #ebf8ff;
+    color: #3182ce;
+    font-weight: 600;
+}
+
+.nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #3182ce;
+}
+
+.nav-item-icon {
+    margin-right: 15px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+/* Topics Menu */
+.topic-menu-title {
+    padding: 15px 20px;
+    font-weight: 700;
+    color: #2d3748;
+    border-bottom: 1px solid #edf2f7;
+    background-color: #f8fafc;
+}
+
+/* Content Styling */
+.content-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.page-title {
+    font-size: 28px;
+    color: #2d3748;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #edf2f7;
+    padding-bottom: 15px;
+}
+
+.content-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 20px;
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.content-text {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #4a5568;
+}
+
+/* Code Blocks */
+.code-block {
+    background-color: #2d3748;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    margin: 20px 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+.code-title {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4299e1;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 0 8px 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Example and Output Boxes */
+.example-box {
+    background-color: #f8fafc;
+    border-left: 4px solid #4299e1;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.example-title {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.output-box {
+    background-color: #f0f9ff;
+    border-left: 4px solid #90cdf4;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.output-title {
+    font-weight: 600;
+    color: #3182ce;
+    margin-bottom: 10px;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    background-color: #edf2f7;
+    color: #4a5568;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.nav-btn:hover {
+    background-color: #e2e8f0;
+}
+
+.prev-btn::before {
+    content: "←";
+    margin-right: 8px;
+}
+
+.next-btn::after {
+    content: "→";
+    margin-left: 8px;
+}
+
+/* Practice Exercise Section */
+.practice-section {
+    background-color: #ebf8ff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+.practice-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c5282;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.practice-title::before {
+    content: "✏️";
+    margin-right: 10px;
+}
+
+.task-list {
+    margin-left: 25px;
+}
+
+.task-item {
+    margin-bottom: 12px;
+}
+
+/* Challenge Section */
+.challenge-section {
+    background-color: #f0fff4;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    border-left: 4px solid #48bb78;
+}
+
+.challenge-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #276749;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.challenge-title::before {
+    content: "🏆";
+    margin-right: 10px;
+}
+
+/* Key Takeaways Box */
+.takeaways-box {
+    background-color: #fffbeb;
+    border-left: 4px solid #f6ad55;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.takeaways-title {
+    font-weight: 600;
+    color: #c05621;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.takeaways-title::before {
+    content: "💡";
+    margin-right: 10px;
+}
+
+.takeaways-list {
+    margin-left: 25px;
+}
+
+.takeaway-item {
+    margin-bottom: 10px;
+}
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Mobile Navigation Menu */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.mobile-nav-items {
+    display: flex;
+    justify-content: space-around;
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.mobile-nav-icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+/*Media Queries*/    
+@media (max-width: 992px){
+    .layout-container{
+        flex-direction:column
+    }
+    .sidebar{
+        width:100%;
+        margin-bottom:20px;
+    }
+    .topic-nav{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-between;     
+    }
+    .nav-item{
+        flex: 1 0 30%;
+        justify-content: center;
+        text-align:center;
+        border-bottom: none;
+        border-right: 1px solid #edf2f7;
+        margin-bottom: 1px;
+    }
+    .nav-item-icon{
+        margin-right: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-card {
+        padding: 20px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .nav-item {
+        flex: 1 0 45%;
+    }
+    
+    .menu-button {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+    
+    body {
+        padding-bottom: 60px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .menu-container {
+        display: none;
+    }
+    
+    .nav-actions {
+        gap: 10px;
+    }
+    
+    .layout-container {
+        padding: 0 10px;
+        margin: 15px auto;
+    }
+    
+    .content-card {
+        padding: 15px;
+    }
+    
+    .page-title {
+        font-size: 20px;
+    }
+
+    .nav-item {
+        flex: 1 0 100%;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-btn {
+        text-align: center;
+        justify-content: center;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">C</div>
+            CodingCompanion
+        </div>
+        <button class="mobile-menu-toggle">☰</button>
+        <div class="menu-container">
+            <button class="menu-button">Explore</button>
+        </div>
+        <div class="nav-actions">
+            <button class="action-button">🔍</button>
+            <button class="action-button">🔔</button>
+            <div class="profile-icon">CP</div>
+        </div>
+    </nav>
+
+    <!-- Main Layout with Sidebar -->
+    <div class="layout-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- Main Navigation Menu -->
+            <div class="nav-menu">
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">📊</div>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item active">
+                    <div class="nav-item-icon">📚</div>
+                    Learning Hub
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🗂️</div>
+                    Resources
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🏅</div>
+                    Achievements
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">⚙️</div>
+                    Settings
+                </a>
+            </div>
+
+            <!-- Topics Navigation Menu -->
+            <div class="nav-menu topic-nav">
+                <div class="topic-menu-title">C++ Fundamentals</div>
+                <a href="cpp-syntax.html" class="nav-item">
+                    <div class="nav-item-icon">1</div>
+                    Syntax
+                </a>
+                <a href="cpp-comments.html" class="nav-item">
+                    <div class="nav-item-icon">2</div>
+                    Comments
+                </a>
+                <a href="cpp-data-types.html" class="nav-item">
+                    <div class="nav-item-icon">3</div>
+                    Data Types
+                </a>
+                <a href="cpp-operators.html" class="nav-item active">
+                    <div class="nav-item-icon">4</div>
+                    Operators
+                </a>
+                <a href="cpp-output.html" class="nav-item">
+                    <div class="nav-item-icon">5</div>
+                    Output
+                </a>
+                <a href="cpp-input.html" class="nav-item">
+                    <div class="nav-item-icon">6</div>
+                    Input
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="content-card">
+                <h1 class="page-title">C++ Operators</h1>
+
+                <div class="content-section">
+                    <h2 class="section-title">Understanding Operators in C++</h2>
+                    <p class="content-text">
+                        Operators are special symbols that perform operations on variables and values. C++ provides a rich set of operators that allow you to perform mathematical calculations, compare values, assign values to variables, and control program flow.
+                    </p>
+                    <p class="content-text">
+                        Mastering operators is essential for writing efficient and functional C++ programs as they form the building blocks of any computational logic in your code.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Types of Operators in C++</h2>
+                    <p class="content-text">
+                        C++ operators can be categorized into the following groups:
+                    </p>
+                    <ol class="content-text">
+                        <li><strong>Arithmetic Operators</strong>: Perform mathematical operations</li>
+                        <li><strong>Assignment Operators</strong>: Assign values to variables</li>
+                        <li><strong>Comparison Operators</strong>: Compare two values</li>
+                        <li><strong>Logical Operators</strong>: Combine conditional statements</li>
+                        <li><strong>Bitwise Operators</strong>: Perform bit-level operations</li>
+                        <li><strong>Increment/Decrement Operators</strong>: Increase or decrease value by 1</li>
+                        <li><strong>Other Operators</strong>: Special purpose operators</li>
+                    </ol>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Arithmetic Operators</h2>
+                    <p class="content-text">
+                        Arithmetic operators perform mathematical operations on numeric values:
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Arithmetic Operators</div>
+                        <table class="content-text" style="width:100%; border-collapse: collapse;">
+                            <tr style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+                                <th style="text-align: left; padding: 10px;">Operator</th>
+                                <th style="text-align: left; padding: 10px;">Name</th>
+                                <th style="text-align: left; padding: 10px;">Description</th>
+                                <th style="text-align: left; padding: 10px;">Example</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">+</td>
+                                <td style="padding: 10px;">Addition</td>
+                                <td style="padding: 10px;">Adds two values</td>
+                                <td style="padding: 10px;">x + y</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">-</td>
+                                <td style="padding: 10px;">Subtraction</td>
+                                <td style="padding: 10px;">Subtracts one value from another</td>
+                                <td style="padding: 10px;">x - y</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">*</td>
+                                <td style="padding: 10px;">Multiplication</td>
+                                <td style="padding: 10px;">Multiplies two values</td>
+                                <td style="padding: 10px;">x * y</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">/</td>
+                                <td style="padding: 10px;">Division</td>
+                                <td style="padding: 10px;">Divides one value by another</td>
+                                <td style="padding: 10px;">x / y</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">%</td>
+                                <td style="padding: 10px;">Modulus</td>
+                                <td style="padding: 10px;">Returns the division remainder</td>
+                                <td style="padding: 10px;">x % y</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Arithmetic Operations</div>
+                        <div class="code-block">
+                            #include <iostream>
+using namespace std;
+
+int main() {
+    int a = 10;
+    int b = 3;
+    
+    // Arithmetic operations
+    int sum = a + b;           // 13
+    int difference = a - b;    // 7
+    int product = a * b;       // 30
+    int quotient = a / b;      // 3 (integer division)
+    int remainder = a % b;     // 1
+    
+    // Display results
+    cout << "a = " << a << ", b = " << b << endl;
+    cout << "a + b = " << sum << endl;
+    cout << "a - b = " << difference << endl;
+    cout << "a * b = " << product << endl;
+    cout << "a / b = " << quotient << endl;
+    cout << "a % b = " << remainder << endl;
+    
+    // Float division
+    float c = 10.0;
+    float d = 3.0;
+    float floatQuotient = c / d;  // 3.33333
+    
+    cout << "c / d = " << floatQuotient << endl;
+    
+    return 0;
+}
+                        </div>
+                    </div>
+
+                    <div class="output-box">
+                        <div class="output-title">Output</div>
+                        a = 10, b = 3<br>
+                        a + b = 13<br>
+                        a - b = 7<br>
+                        a * b = 30<br>
+                        a / b = 3<br>
+                        a % b = 1<br>
+                        c / d = 3.33333
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Assignment Operators</h2>
+                    <p class="content-text">
+                        Assignment operators are used to assign values to variables. The basic assignment operator is =, but C++ also provides compound assignment operators that perform an operation and assignment in one step.
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Assignment Operators</div>
+                        <table class="content-text" style="width:100%; border-collapse: collapse;">
+                            <tr style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+                                <th style="text-align: left; padding: 10px;">Operator</th>
+                                <th style="text-align: left; padding: 10px;">Example</th>
+                                <th style="text-align: left; padding: 10px;">Equivalent to</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">=</td>
+                                <td style="padding: 10px;">x = 5</td>
+                                <td style="padding: 10px;">x = 5</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">+=</td>
+                                <td style="padding: 10px;">x += 5</td>
+                                <td style="padding: 10px;">x = x + 5</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">-=</td>
+                                <td style="padding: 10px;">x -= 5</td>
+                                <td style="padding: 10px;">x = x - 5</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">*=</td>
+                                <td style="padding: 10px;">x *= 5</td>
+                                <td style="padding: 10px;">x = x * 5</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">/=</td>
+                                <td style="padding: 10px;">x /= 5</td>
+                                <td style="padding: 10px;">x = x / 5</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">%=</td>
+                                <td style="padding: 10px;">x %= 5</td>
+                                <td style="padding: 10px;">x = x % 5</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Assignment Operations</div>
+                        <div class="code-block">
+                            #include <iostream>
+using namespace std;
+
+int main() {
+    int x = 10;
+    
+    cout << "Initial value: x = " << x << endl;
+    
+    // Basic assignment
+    x = 20;
+    cout << "After x = 20: x = " << x << endl;
+    
+    // Compound assignments
+    x += 5;  // x = x + 5
+    cout << "After x += 5: x = " << x << endl;
+    
+    x -= 10;  // x = x - 10
+    cout << "After x -= 10: x = " << x << endl;
+    
+    x *= 2;  // x = x * 2
+    cout << "After x *= 2: x = " << x << endl;
+    
+    x /= 5;  // x = x / 5
+    cout << "After x /= 5: x = " << x << endl;
+    
+    x %= 3;  // x = x % 3
+    cout << "After x %= 3: x = " << x << endl;
+    
+    return 0;
+}
+                        </div>
+                    </div>
+
+                    <div class="output-box">
+                        <div class="output-title">Output</div>
+                        Initial value: x = 10<br>
+                        After x = 20: x = 20<br>
+                        After x += 5: x = 25<br>
+                        After x -= 10: x = 15<br>
+                        After x *= 2: x = 30<br>
+                        After x /= 5: x = 6<br>
+                        After x %= 3: x = 0
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Comparison Operators</h2>
+                    <p class="content-text">
+                        Comparison operators are used to compare two values. They return a boolean result (true or false), which is essential for conditional statements and loops.
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Comparison Operators</div>
+                        <table class="content-text" style="width:100%; border-collapse: collapse;">
+                            <tr style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+                                <th style="text-align: left; padding: 10px;">Operator</th>
+                                <th style="text-align: left; padding: 10px;">Name</th>
+                                <th style="text-align: left; padding: 10px;">Example</th>
+                                <th style="text-align: left; padding: 10px;">Result</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">==</td>
+                                <td style="padding: 10px;">Equal to</td>
+                                <td style="padding: 10px;">x == y</td>
+                                <td style="padding: 10px;">true if x equals y</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">!=</td>
+                                <td style="padding: 10px;">Not equal to</td>
+                                <td style="padding: 10px;">x != y</td>
+                                <td style="padding: 10px;">true if x is not equal to y</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">></td>
+                                <td style="padding: 10px;">Greater than</td>
+                                <td style="padding: 10px;">x > y</td>
+                                <td style="padding: 10px;">true if x is greater than y</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;"><</td>
+                                <td style="padding: 10px;">Less than</td>
+                                <td style="padding: 10px;">x < y</td>
+                                <td style="padding: 10px;">true if x is less than y</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 10px;">>=</td>
+                                <td style="padding: 10px;">Greater than or equal to</td>
+                

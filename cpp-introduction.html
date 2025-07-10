@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Programming Fundamentals in C++</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0b4d83 0%, #1e88e5 100%);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon {
+            background-color: white;
+            color: #0b4d83;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .course-title {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .nav-item {
+            padding: 15px;
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            color: #1e88e5;
+            border-bottom: 3px solid #1e88e5;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #444;
+        }
+        
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .topic-list {
+            list-style: none;
+        }
+        
+        .topic-item {
+            margin-bottom: 3px;
+        }
+        
+        .topic-link {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #444;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .topic-link:hover, .topic-link.active {
+            background-color: #e3f2fd;
+            color: #1e88e5;
+        }
+        
+        .content {
+            flex-grow: 1;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 30px;
+        }
+        
+        /* Content Styles */
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #0b4d83;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #0b4d83;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e3f2fd;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin: 20px 0 10px;
+            color: #1e88e5;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .code-block {
+            background-color: #f5f7f9;
+            border-left: 4px solid #1e88e5;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 15px;
+            overflow-x: auto;
+        }
+        
+        .note {
+            background-color: #e3f2fd;
+            border-left: 4px solid #1e88e5;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .note-title {
+            font-weight: bold;
+            color: #0b4d83;
+            margin-bottom: 5px;
+        }
+        
+        .exercise {
+            background-color: #f0f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .exercise-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #0b4d83;
+        }
+        
+        ul, ol {
+            margin: 10px 0 15px 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #1e88e5;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .button:hover {
+            background-color: #0b4d83;
+        }
+        
+        .exercises-section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+                position: static;
+            }
+            
+            .topic-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .topic-item {
+                flex: 1 0 auto;
+            }
+            
+            .topic-link {
+                text-align: center;
+                padding: 12px 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                z-index: 100;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-item {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+            
+            .nav-item:hover, .nav-item.active {
+                border-bottom: none;
+                border-left: 3px solid #1e88e5;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            h2 {
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 24px;
+            }
+            
+            .course-title {
+                font-size: 16px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            .topic-item {
+                flex: 1 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">C++</div>
+                CodeMentor
+            </div>
+            <div class="course-title">C++ Programming Fundamentals</div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="nav-title">Module 1</div>
+            <button class="mobile-menu-toggle">☰</button>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-item active">Introduction</a></li>
+                <li><a href="syntax.html" class="nav-item">Syntax</a></li>
+                <li><a href="comments.html" class="nav-item">Comments</a></li>
+                <li><a href="data-types.html" class="nav-item">Data Types</a></li>
+                <li><a href="operators.html" class="nav-item">Operators</a></li>
+                <li><a href="output.html" class="nav-item">Output</a></li>
+                <li><a href="input.html" class="nav-item">Input</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <aside class="sidebar">
+            <ul class="topic-list">
+                <li class="topic-item"><a href="#intro" class="topic-link active">Introduction to C++</a></li>
+                <li class="topic-item"><a href="#history" class="topic-link">History & Evolution</a></li>
+                <li class="topic-item"><a href="#features" class="topic-link">Key Features</a></li>
+                <li class="topic-item"><a href="#setup" class="topic-link">Setting Up Environment</a></li>
+                <li class="topic-item"><a href="#first-program" class="topic-link">Your First Program</a></li>
+                <li class="topic-item"><a href="#exercises" class="topic-link">Exercises</a></li>
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <div class="section" id="intro">
+                <h1>Introduction to Programming with C++</h1>
+                <p>Welcome to the world of C++ programming! C++ is a powerful, general-purpose programming language that extends the C programming language with additional features such as classes, objects, and exceptions. It's widely used in developing games, system software, embedded systems, and high-performance applications.</p>
+                
+                <div class="note">
+                    <div class="note-title">Why Learn C++?</div>
+                    <p>Learning C++ provides a strong foundation in programming concepts while giving you access to both high-level abstractions and low-level memory manipulation. It remains one of the most influential and widely used programming languages in the software industry.</p>
+                </div>
+                
+                <p>In this course, we'll start with the fundamentals and gradually build your knowledge and skills in C++ programming. By the end, you'll be able to write efficient and effective C++ programs to solve real-world problems.</p>
+            </div>
+            
+            <div class="section" id="history">
+                <h2>History & Evolution of C++</h2>
+                <p>C++ was developed by Bjarne Stroustrup at Bell Labs starting in 1979. It was initially called "C with Classes" and later renamed to C++ in 1983.</p>
+                
+                <h3>Key Milestones</h3>
+                <ul>
+                    <li><strong>1979:</strong> Development begins as "C with Classes"</li>
+                    <li><strong>1983:</strong> Renamed to C++</li>
+                    <li><strong>1985:</strong> First commercial release</li>
+                    <li><strong>1998:</strong> First ISO standard (C++98)</li>
+                    <li><strong>2011:</strong> Major update with C++11</li>
+                    <li><strong>2014, 2017, 2020:</strong> Subsequent updates with additional features</li>
+                </ul>
+                
+                <p>The name "C++" is derived from the increment operator (++) in C, symbolizing that C++ is an extension of the C language.</p>
+            </div>
+            
+            <div class="section" id="features">
+                <h2>Key Features of C++</h2>
+                <p>C++ combines the efficiency and control of low-level languages with the abstractions of high-level languages. Here are some of its key features:</p>
+                
+                <h3>Object-Oriented Programming</h3>
+                <p>C++ supports classes and objects, enabling abstraction, encapsulation, inheritance, and polymorphism.</p>
+                
+                <h3>Performance & Efficiency</h3>
+                <p>C++ provides low-level memory manipulation and high performance, making it suitable for resource-intensive applications.</p>
+                
+                <h3>Standard Template Library (STL)</h3>
+                <p>The STL offers ready-to-use data structures and algorithms, significantly reducing development time.</p>
+                
+                <h3>Platform Independence</h3>
+                <p>C++ code can be compiled for different platforms with minimal changes, making it highly portable.</p>
+                
+                <h3>Backward Compatibility</h3>
+                <p>C++ is largely compatible with C, allowing most C code to be compiled with a C++ compiler.</p>
+            </div>
+            
+            <div class="section" id="setup">
+                <h2>Setting Up Your C++ Development Environment</h2>
+                <p>Before you start writing C++ programs, you need to set up a development environment. This typically involves installing a compiler and optionally an Integrated Development Environment (IDE).</p>
+                
+                <h3>Popular C++ Compilers</h3>
+                <ul>
+                    <li><strong>GCC (GNU Compiler Collection):</strong> Available on Linux, macOS, and Windows (via MinGW or Cygwin)</li>
+                    <li><strong>Clang:</strong> Available on macOS, Linux, and Windows</li>
+                    <li><strong>Microsoft Visual C++ (MSVC):</strong> Part of Visual Studio on Windows</li>
+                </ul>
+                
+                <h3>Recommended IDEs</h3>
+                <ul>
+                    <li><strong>Visual Studio:</strong> Full-featured IDE for Windows (Community Edition is free)</li>
+                    <li><strong>Visual Studio Code:</strong> Lightweight, extensible editor for all platforms</li>
+                    <li><strong>Code::Blocks:</strong> Open-source, cross-platform IDE</li>
+                    <li><strong>CLion:</strong> Commercial IDE from JetBrains</li>
+                </ul>
+                
+                <div class="note">
+                    <div class="note-title">Online Compilers</div>
+                    <p>If you don't want to install anything, you can use online C++ compilers like <a href="https://www.onlinegdb.com/online_c++_compiler" target="_blank">OnlineGDB</a>, <a href="https://replit.com/languages/cpp" target="_blank">Replit</a>, or <a href="https://www.programiz.com/cpp-programming/online-compiler/" target="_blank">Programiz</a>.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="first-program">
+                <h2>Your First C++ Program</h2>
+                <p>Let's write a simple "Hello, World!" program to get started with C++.</p>
+                
+                <div class="code-block">
+#include &lt;iostream&gt;
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+                </div>
+                
+                <h3>Code Breakdown</h3>
+                <ul>
+                    <li><code>#include &lt;iostream&gt;</code>: Includes the input/output stream library</li>
+                    <li><code>int main()</code>: The main function, entry point of the program</li>
+                    <li><code>std::cout</code>: The standard output stream object</li>
+                    <li><code>&lt;&lt;</code>: Output operator, sends data to the output stream</li>
+                    <li><code>std::endl</code>: Ends the line and flushes the output buffer</li>
+                    <li><code>return 0;</code>: Indicates successful program completion</li>
+                </ul>
+                
+                <h3>Compiling and Running</h3>
+                <p>To compile and run this program:</p>
+                
+                <h4>Using GCC (Terminal/Command Prompt):</h4>
+                <div class="code-block">
+g++ hello.cpp -o hello
+./hello  # On Linux/macOS
+hello    # On Windows
+                </div>
+                
+                <h4>Using an IDE:</h4>
+                <p>Simply press the "Run" or "Build and Run" button in your IDE after creating a new project with this code.</p>
+                
+                <div class="note">
+                    <div class="note-title">What's Happening?</div>
+                    <p>When you run this program, it displays "Hello, World!" on your screen. This demonstrates the basic structure of a C++ program and how to output text to the console.</p>
+                </div>
+            </div>
+            
+            <div class="section exercises-section" id="exercises">
+                <h2>Exercises - Introduction to C++</h2>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Exercise 1: Set up your environment</div>
+                    <p>Install a C++ compiler and IDE of your choice. Create a new project and write the "Hello, World!" program. Compile and run it to ensure your setup works correctly.</p>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Exercise 2: Modify the output</div>
+                    <p>Change the "Hello, World!" program to display your name and a brief introduction about yourself.</p>
+                    <p>Example: "Hello, I'm John Doe. I'm learning C++ programming!"</p>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Exercise 3: Multiple lines of output</div>
+                    <p>Modify the program to display multiple lines of text. Use <code>std::endl</code> to create line breaks.</p>
+                    <p>Example:</p>
+                    <div class="code-block">
+#include &lt;iostream&gt;
+
+int main() {
+    std::cout << "Line 1: Introduction to C++" << std::endl;
+    std::cout << "Line 2: Getting started with programming" << std::endl;
+    std::cout << "Line 3: This is going to be fun!" << std::endl;
+    return 0;
+}
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Exercise 4: Research</div>
+                    <p>Research and write a short paragraph (3-5 sentences) about how C++ is used in a field that interests you (e.g., game development, embedded systems, finance, etc.). Add this information as comments in your program.</p>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Challenge: ASCII Art</div>
+                    <p>Create a program that outputs a simple ASCII art design using multiple lines of text.</p>
+                    <p>Example:</p>
+                    <div class="code-block">
+#include &lt;iostream&gt;
+
+int main() {
+    std::cout << "  /\\" << std::endl;
+    std::cout << " /  \\" << std::endl;
+    std::cout << "/____\\" << std::endl;
+    return 0;
+}
+                    </div>
+                    <p>This would display a simple triangle. Try to create something more elaborate!</p>
+                </div>
+                
+                <p>Complete these exercises to reinforce your understanding of setting up a C++ environment and writing basic programs. In the next lesson, we'll dive into C++ syntax fundamentals.</p>
+                
+                <a href="syntax.html" class="button">Next Lesson: C++ Syntax →</a>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+        
+        // Highlight active sidebar link
+        const sidebarLinks = document.querySelectorAll('.topic-link');
+        
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                e.target.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

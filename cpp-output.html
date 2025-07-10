@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C++ Output - Programming Foundations | CodingCompanion</title>
+
+<style>
+/*Reset and Base Styles*/
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+}
+body {
+    background-color: #f0f2f5;
+    color:#1e293b;  
+    line-height: 1.6;
+}
+
+/*Navigation Bar*/
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items: center;
+padding: 15px 25px;
+background-color:#1a365d;
+color: white;
+box-shadow: 0 4px 12px rgba(0,0,0, 0.1);
+position:relative;
+}
+
+.logo{
+  display:flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.logo-icon{
+  width:32px;
+  height:32px;
+  background-color: #4299e1;
+  font-size: 18px;
+  font-weight:800 ;
+  margin-right: 10px;
+  border-radius:8px;
+  display:flex;
+  align-items:center ;
+  justify-content: center;
+
+}
+
+.menu-button{
+  background: rgba(255,255,255, 0.1);
+  border:none;
+  font-size: 16px;
+  font-weight: 500;
+  color:white;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  padding:8px 15px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.menu-button:hover{
+  background: rgba(255,255,255, 0.2);
+}
+
+.menu-button:after{
+  content:"\203A"; /*Unicode for black own pointing triangle*/
+  font-size: 18px;
+  transform:rotate(90deg);
+  display:inline-block;
+  margin-left: 8px;
+}
+
+.nav-actions{
+  display:flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.action-button{
+  background: none;
+  border:none;
+  font-size: 18px;
+  color:white;
+  cursor:pointer;
+  width: 35px;
+  height: 35px;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  transition: background-color 0.2s
+}
+.action-button:hover{
+  background: rgba(255,255,255, 0.1);
+}
+
+.profile-icon{
+  width:40px;
+  height: 40px;
+  background-color: #4299e1;
+  border-radius:50% ;
+  display:flex;
+  align-items:center;
+  justify-content:center ;
+  cursor: pointer;
+  font-weight:bold ;
+  font-size:16px ;
+}
+
+.profile-icon img{
+  width:24px;
+  height: 24px;
+}
+
+/*Main Container*/
+
+.layout-container{
+  display:flex;
+  max-width:1200px;
+  margin: 25px auto;
+  gap: 25px;
+  padding: 0 20px;
+}
+.sidebar{
+  width:240px;
+  flex-shrink: 0;
+}
+.main-content{
+  flex-grow:1;
+}
+
+.nav-menu {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.nav-item:not(:last-child) {
+    border-bottom: 1px solid #edf2f7;
+}
+
+.nav-item:hover {
+    background-color: #f8fafc;
+    color: #4299e1;
+}
+
+.nav-item.active {
+    background-color: #ebf8ff;
+    color: #3182ce;
+    font-weight: 600;
+}
+
+.nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #3182ce;
+}
+
+.nav-item-icon {
+    margin-right: 15px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+/* Topics Menu */
+.topic-menu-title {
+    padding: 15px 20px;
+    font-weight: 700;
+    color: #2d3748;
+    border-bottom: 1px solid #edf2f7;
+    background-color: #f8fafc;
+}
+
+/* Content Styling */
+.content-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.page-title {
+    font-size: 28px;
+    color: #2d3748;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #edf2f7;
+    padding-bottom: 15px;
+}
+
+.content-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 20px;
+    color: #2d3748;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.content-text {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #4a5568;
+}
+
+/* Code Blocks */
+.code-block {
+    background-color: #2d3748;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    margin: 20px 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+.code-title {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4299e1;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 0 8px 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Example and Output Boxes */
+.example-box {
+    background-color: #f8fafc;
+    border-left: 4px solid #4299e1;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.example-title {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.output-box {
+    background-color: #f0f9ff;
+    border-left: 4px solid #90cdf4;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.output-title {
+    font-weight: 600;
+    color: #3182ce;
+    margin-bottom: 10px;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    background-color: #edf2f7;
+    color: #4a5568;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.nav-btn:hover {
+    background-color: #e2e8f0;
+}
+
+.prev-btn::before {
+    content: "←";
+    margin-right: 8px;
+}
+
+.next-btn::after {
+    content: "→";
+    margin-left: 8px;
+}
+
+/* Practice Exercise Section */
+.practice-section {
+    background-color: #ebf8ff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+.practice-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c5282;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.practice-title::before {
+    content: "✏️";
+    margin-right: 10px;
+}
+
+.task-list {
+    margin-left: 25px;
+}
+
+.task-item {
+    margin-bottom: 12px;
+}
+
+/* Challenge Section */
+.challenge-section {
+    background-color: #f0fff4;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    border-left: 4px solid #48bb78;
+}
+
+.challenge-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #276749;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.challenge-title::before {
+    content: "🏆";
+    margin-right: 10px;
+}
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Mobile Navigation Menu */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.mobile-nav-items {
+    display: flex;
+    justify-content: space-around;
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.mobile-nav-icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+/* Key Takeaways Box */
+.takeaways-box {
+    background-color: #fffbeb;
+    border-left: 4px solid #f6ad55;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.takeaways-title {
+    font-weight: 600;
+    color: #c05621;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.takeaways-title::before {
+    content: "💡";
+    margin-right: 10px;
+}
+
+.takeaways-list {
+    margin-left: 25px;
+}
+
+.takeaway-item {
+    margin-bottom: 10px;
+}
+
+/* Media Queries */
+@media (max-width: 992px){
+  .layout-container{
+      flex-direction:column
+  }
+  .sidebar{
+      width:100%;
+      margin-bottom:20px;
+  }
+  .nav-menu{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;     
+  }
+  .nav-item{
+      flex: 1 0 30%;
+      justify-content: center;
+      text-align:center ;
+      border-bottom: none;
+      border-right: 1px solid #edf2f7;
+      margin-bottom: 1px;
+  }
+  .nav-item-icon{
+      margin-right: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+    .content-card {
+        padding: 20px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .nav-item {
+        flex: 1 0 45%;
+    }
+    
+    .menu-button {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+    
+    body {
+        padding-bottom: 60px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .menu-container {
+        display: none;
+    }
+    
+    .nav-actions {
+        gap: 10px;
+    }
+    
+    .layout-container {
+        padding: 0 10px;
+        margin: 15px auto;
+    }
+    
+    .content-card {
+        padding: 15px;
+    }
+    
+    .page-title {
+        font-size: 20px;
+    }
+
+    .nav-item {
+        flex: 1 0 100%;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-btn {
+        text-align: center;
+        justify-content: center;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">C</div>
+            CodingCompanion
+        </div>
+        <button class="mobile-menu-toggle">☰</button>
+        <div class="menu-container">
+            <button class="menu-button">Explore</button>
+        </div>
+        <div class="nav-actions">
+            <button class="action-button">🔍</button>
+            <button class="action-button">🔔</button>
+            <div class="profile-icon">CP</div>
+        </div>
+    </nav>
+
+    <!-- Main Layout with Sidebar -->
+    <div class="layout-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- Main Navigation Menu -->
+            <div class="nav-menu">
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">📊</div>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item active">
+                    <div class="nav-item-icon">📚</div>
+                    Learning Hub
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🗂️</div>
+                    Resources
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🏅</div>
+                    Achievements
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">⚙️</div>
+                    Settings
+                </a>
+            </div>
+
+            <!-- Topics Navigation Menu -->
+            <div class="nav-menu topic-nav">
+                <div class="topic-menu-title">C++ Fundamentals</div>
+                <a href="cpp-syntax.html" class="nav-item">
+                    <div class="nav-item-icon">1</div>
+                    Syntax
+                </a>
+                <a href="cpp-comments.html" class="nav-item">
+                    <div class="nav-item-icon">2</div>
+                    Comments
+                </a>
+                <a href="cpp-data-types.html" class="nav-item">
+                    <div class="nav-item-icon">3</div>
+                    Data Types
+                </a>
+                <a href="cpp-operators.html" class="nav-item">
+                    <div class="nav-item-icon">4</div>
+                    Operators
+                </a>
+                <a href="cpp-output.html" class="nav-item active">
+                    <div class="nav-item-icon">5</div>
+                    Output
+                </a>
+                <a href="cpp-input.html" class="nav-item">
+                    <div class="nav-item-icon">6</div>
+                    Input
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="content-card">
+                <h1 class="page-title">C++ Output</h1>
+
+                <div class="content-section">
+                    <h2 class="section-title">Understanding Output in C++</h2>
+                    <p class="content-text">
+                        Output is the process of displaying or writing data from your program to a destination such as the screen, a file, or another device. In C++, we use streams to handle output operations.
+                    </p>
+                    <p class="content-text">
+                        The most common way to display output in C++ is through the <strong>iostream</strong> library, which provides the <strong>cout</strong> object (console output) along with operators and manipulators to control how the data is formatted.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">The cout Object</h2>
+                    <p class="content-text">
+                        The <code>cout</code> object represents the standard output stream, which is typically connected to the console or terminal window. To use it, you need to include the <code>iostream</code> library and use the <code>std</code> namespace.
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Basic cout Example</div>
+                        <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World!";
+    return 0;
+}
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        The <code><<</code> operator is called the insertion operator or stream insertion operator. It inserts (sends) the data that follows it into the output stream.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Outputting Different Data Types</h2>
+                    <p class="content-text">
+                        The <code>cout</code> object can handle various data types, including integers, floating-point numbers, characters, strings, and more.
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Outputting Different Data Types</div>
+                        <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int age = 25;
+    double height = 5.9;
+    char grade = 'A';
+    string name = "John Doe";
+    bool isStudent = true;
+    
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
+    cout << "Height: " << height << " feet" << endl;
+    cout << "Grade: " << grade << endl;
+    cout << "Student Status: " << isStudent << endl;
+    
+    return 0;
+}
+                        </div>
+                    </div>
+
+                    <div class="output-box">
+                        <div class="output-title">Output</div>
+                        Name: John Doe<br>
+                        Age: 25<br>
+                        Height: 5.9 feet<br>
+                        Grade: A<br>
+                        Student Status: 1
+                    </div>
+
+                    <p class="content-text">
+                        Note that when outputting a boolean value, C++ displays <code>1</code> for <code>true</code> and <code>0</code> for <code>false</code> by default.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Adding Line Breaks</h2>
+                    <p class="content-text">
+                        There are two main ways to create line breaks in C++ output:
+                    </p>
+                    <ol class="content-text">
+                        <li>Using the <code>endl</code> manipulator</li>
+                        <li>Using the newline character <code>\n</code></li>
+                    </ol>
+
+                    <div class="example-box">
+                        <div class="example-title">Line Break Examples</div>
+                        <div class="code-block">
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Using endl
+    cout << "Line 1" << endl;
+    cout << "Line 2" << endl;
+    
+    // Using \n
+    cout << "Line 3\nLine 4\n";
+    
+    // Both approaches can be combined
+    cout << "Line 5\n" << "Line 6" << endl;
+    
+    return 0;
+}
+                        </div>
+                    </div>
+
+                    <div class="output-box">
+                        <div class="output-title">Output</div>
+                        Line 1<br>
+                        Line 2<br>
+                        Line 3<br>
+                        Line 4<br>
+                        Line 5<br>
+                        Line 6
+                    </div>
+
+                    <p class="content-text">
+                        The <code>endl</code> manipulator not only inserts a newline character but also flushes the output buffer, which ensures that the output is immediately displayed. The <code>\n</code> character only inserts a newline without flushing the buffer.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Formatting Output</h2>
+                    <p class="content-text">
+                        C++ provides several ways to format output using I/O manipulators. These manipulators are functions that can be inserted into the output stream to change how subsequent data is displayed.
+                    </p>
+                    <p class="content-text">
+                        Some common manipulators include:
+                    </p>
+                    <ul class="content-text">
+                        <li><strong>setw(n)</strong>: Sets the field width to n characters (requires <code>&lt;iomanip&gt;</code>)</li>
+                        <li><strong>fixed</strong>: Displays floating-point numbers in fixed-point notation</li>
+                        <li><strong>setprecision(n)</strong>: Sets the decimal precision to n digits (requires <code>&lt;iomanip&gt;</code>)</li>
+                        <li><strong>left/right</strong>: Aligns output to the left or right</li>
+                        <li><strong>boolalpha</strong>: Displays boolean values as "true" or "false" instead of 1 or 0</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <div class="example-title">Formatting Example</div>
+                        <div class="code-block">
+#include <iostream>
+#include <iomanip>  // Required for setw, setprecision
+using namespace std;
+
+int main() {
+    double price = 45.6789;
+    bool inStock = true;
+    
+    // Formatting floating-point numbers
+    cout << "Regular: " << price << endl;
+    cout << "Fixed with 2 decimals: " << fixed << setprecision(2) << price << endl;
+    
+    // Setting field width and alignment
+    cout << "Left aligned: |" << left << setw(10) << 123 << "|" << endl;
+    cout << "Right aligned: |" << right << setw(10) << 123 << "|" << endl;
+    
+    // Boolean output
+    cout << "Default bool: " << inStock << endl;
+    cout << "Using boolalpha: " << boolalpha << inStock << endl;
+    
+    return 0;
+}
+                        </div>
+                    </div>
+
+                    <div class="output-box">
+                        <div class="output-title">Output</div>
+                        Regular: 45.6789<br>
+                        Fixed with 2 decimals: 45.68<br>
+                        Left aligned: |123       |<br>
+                        Right aligned: |       123|<br>
+                        Default bool: 1<br>
+                        Using boolalpha: true
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Output to Files</h2>
+                    <p class="content-text">
+                        In addition to console output, C++ allows you to write output to files using the <code>ofstream</code> class from the <code>&lt;fstream&gt;</code> library.
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">File Output Example</div>
+                        <div class="code-block">
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    // Creating an output file stream
+    ofstream outFile("output.txt");
+    
+    if (outFile.is_open()) {
+        // Writing to the file
+        outFile << "This is written to a file." << endl;
+        outFile << "Multiple lines can be written." << endl;
+        outFile << "Numbers too: " << 42 << endl;
+        
+        // Closing the file
+        outFile.close();
+        cout << "Data has been written to output.txt successfully." << endl;
+    } else {
+        cout << "Unable to open the file for writing." << endl;
+    }
+    
+    return 0;
+}
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        This example creates a new file called "output.txt" and writes three lines of text to it. The syntax for writing to a file is the same as writing to <code>cout</code>, using the <code><<</code> operator.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Common Output Techniques</h2>
+                    <p class="content-text">
+                        Here are some common techniques and best practices for C++ output:
+                    </p>
+                    
+                    <h3 style="margin: 15px 0 10px; font-weight: 600; color: #2d3748;">Chaining Multiple Outputs</h3>
+                    <div class="example-box">
+                        <div class="code-block">
+// Chaining multiple values in a single statement
+cout << "The sum of " << a << " and " << b << " is " << (a + b) << endl;
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin: 15px 0 10px; font-weight: 600; color: #2d3748;">Creating Tables</h3>
+                    <div class="example-box">
+                        <div class="code-block">
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    cout << left << setw(15) << "Name" << setw(8) << "Age" << setw(10) << "Grade" << endl;
+    cout << setfill('-') << setw(33) << "-" << setfill(' ') << endl;
+    cout << left << setw(15) << "Alice" << setw(8) << 18 << setw(10) << 'A' << endl;
+    cout << left << setw(15) << "Bob" << setw(8) << 17 << setw(10) << 'B' << endl;
+    cout << left << setw(15) << "Charlie" << setw(8) << 19 << setw(10) << 'A' << endl;
+    
+    return 0;
+}
+                        </div>
+                    </div>
+                    
+                    <div class="output-box">
+                        <div class="output-title">Output</div>
+                        Name           Age     Grade     <br>
+                        ---------------------------------<br>
+                        Alice          18      A         <br>
+                        Bob            17      B         <br>
+                        Charlie        19      A         
+                    </div>
+                </div>
+
+                <div class="takeaways-box">
+                    <div class="takeaways-title">Key Takeaways</div>
+                    <ul class="takeaways-list">
+                        <li class="takeaway-item">In C++, the <code>cout</code> object is used for standard console output.</li>
+                        <li class="takeaway-item">The <code><<</code> operator is used to insert data into the output stream.</li>
+                        <li class="takeaway-item">Line breaks can be added using <code>endl</code> or the <code>\n</code> character.</li>
+                        <li class="takeaway-item">Output formatting can be controlled with manipulators from <code>&lt;iomanip&gt;</code>.</li>
+                        <li class="takeaway-item">File output is handled using the <code>ofstream</code> class.</li>
+                        <li class="takeaway-item">You can chain multiple outputs in a single statement for more readable code.</li>
+                    </ul>
+                </div>
+
+                <div class="practice-section">
+                    <div class="practice-title">Practice Exercises</div>
+                    <ol class="task-list">
+                        <li class="task-item">
+                            Write a program that displays your name, age, and three of your hobbies on separate lines.
+                        </li>
+                        <li class="task-item">
+                            Create a program that calculates and displays the area and perimeter of a rectangle with width 5.4 and height 3.2. Format the output to show exactly two decimal places.
+                        </li>
+                        <li class="task-item">
+                            Write a program that creates a nicely formatted table showing the temperature conversion from Celsius to Fahrenheit for values from 0°C to 100°C in steps of 10.
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="challenge-section">
+                    <div class="challenge-title">Code Challenge</div>
+                    <p class="content-text">
+                        Create a C++ program that generates a receipt for a purchase. Your program should:
+                    </p>
+                    <ol class="task-list">
+                        <li class="task-item">Define at least 5 items with their names, quantities, and prices</li>
+                        <li class="task-item">Calculate the subtotal for each item (quantity × price)</li>
+                        <li class="task-item">Calculate the total cost of all items</li>
+                        <li class="task-item">Apply a 7.5% tax to the total</li>
+                        <li class="task-item">Display a well-formatted receipt

@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Data Types - Programming Foundations | CodeMentor</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background-color: #1a365d;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            background-color: #4299e1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .menu-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-button:after {
+            content: "\203A";
+            transform: rotate(90deg);
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 18px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .action-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .action-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4299e1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Main Container with Sidebar Layout */
+        .layout-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 25px auto;
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            width: 240px;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex-grow: 1;
+        }
+
+        /* Navigation Menu with Visual Indicators */
+        .nav-menu {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .nav-item:not(:last-child) {
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .nav-item:hover {
+            background-color: #f8fafc;
+            color: #4299e1;
+        }
+
+        .nav-item.active {
+            background-color: #ebf8ff;
+            color: #3182ce;
+            font-weight: 600;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #3182ce;
+        }
+
+        .nav-item-icon {
+            margin-right: 15px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* Topics Menu */
+        .topic-menu-title {
+            padding: 15px 20px;
+            font-weight: 700;
+            color: #2d3748;
+            border-bottom: 1px solid #edf2f7;
+            background-color: #f8fafc;
+        }
+
+        /* Content Styling */
+        .content-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-title {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 15px;
+        }
+
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .content-text {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #4a5568;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-title {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #4299e1;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 0 8px 0 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Example and Output Boxes */
+        .example-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #4299e1;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .output-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid #90cdf4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .output-title {
+            font-weight: 600;
+            color: #3182ce;
+            margin-bottom: 10px;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background-color: #edf2f7;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        .prev-btn::before {
+            content: "←";
+            margin-right: 8px;
+        }
+
+        .next-btn::after {
+            content: "→";
+            margin-left: 8px;
+        }
+
+        /* Practice Exercise Section */
+        .practice-section {
+            background-color: #ebf8ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .practice-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .practice-title::before {
+            content: "✏️";
+            margin-right: 10px;
+        }
+
+        .task-list {
+            margin-left: 25px;
+        }
+
+        .task-item {
+            margin-bottom: 12px;
+        }
+
+        /* Challenge Section */
+        .challenge-section {
+            background-color: #f0fff4;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 4px solid #48bb78;
+        }
+
+        .challenge-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #276749;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .challenge-title::before {
+            content: "🏆";
+            margin-right: 10px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Mobile Navigation Menu */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        /* Key Takeaways Box */
+        .takeaways-box {
+            background-color: #fffbeb;
+            border-left: 4px solid #f6ad55;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .takeaways-title {
+            font-weight: 600;
+            color: #c05621;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .takeaways-title::before {
+            content: "💡";
+            margin-right: 10px;
+        }
+
+        .takeaways-list {
+            margin-left: 25px;
+        }
+
+        .takeaway-item {
+            margin-bottom: 10px;
+        }
+
+        /* Data type table */
+        .data-type-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-type-table th,
+        .data-type-table td {
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .data-type-table thead {
+            background-color: #f8fafc;
+            font-weight: bold;
+        }
+
+        .data-type-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 992px) {
+            .layout-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .topic-nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .nav-item {
+                flex: 1 0 30%;
+                justify-content: center;
+                text-align: center;
+                border-bottom: none;
+                border-right: 1px solid #edf2f7;
+                margin-bottom: 1px;
+            }
+            
+            .nav-item-icon {
+                margin-right: 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .nav-item {
+                flex: 1 0 45%;
+            }
+            
+            .menu-button {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+            
+            body {
+                padding-bottom: 60px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .menu-container {
+                display: none;
+            }
+            
+            .nav-actions {
+                gap: 10px;
+            }
+            
+            .layout-container {
+                padding: 0 10px;
+                margin: 15px auto;
+            }
+            
+            .content-card {
+                padding: 15px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+            }
+
+            .nav-item {
+                flex: 1 0 100%;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">C</div>
+            CodingCompanion
+        </div>
+        <button class="mobile-menu-toggle">☰</button>
+        <div class="menu-container">
+            <button class="menu-button">Explore</button>
+        </div>
+        <div class="nav-actions">
+            <button class="action-button">🔍</button>
+            <button class="action-button">🔔</button>
+            <div class="profile-icon">AM</div>
+        </div>
+    </nav>
+
+    <!-- Main Layout with Sidebar -->
+    <div class="layout-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- Main Navigation Menu -->
+            <div class="nav-menu">
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">📊</div>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item active">
+                    <div class="nav-item-icon">📚</div>
+                    Learning Hub
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🗂️</div>
+                    Resources
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🏅</div>
+                    Achievements
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">⚙️</div>
+                    Settings
+                </a>
+            </div>
+
+            <!-- Topics Navigation Menu -->
+            <div class="nav-menu topic-nav">
+                <div class="topic-menu-title">C++ Fundamentals</div>
+                <a href="cpp-syntax.html" class="nav-item">
+                    <div class="nav-item-icon">1</div>
+                    Syntax
+                </a>
+                <a href="cpp-comments.html" class="nav-item">
+                    <div class="nav-item-icon">2</div>
+                    Comments
+                </a>
+                <a href="cpp-data-types.html" class="nav-item active">
+                    <div class="nav-item-icon">3</div>
+                    Data Types
+                </a>
+                <a href="cpp-operators.html" class="nav-item">
+                    <div class="nav-item-icon">4</div>
+                    Operators
+                </a>
+                <a href="cpp-output.html" class="nav-item">
+                    <div class="nav-item-icon">5</div>
+                    Output
+                </a>
+                <a href="cpp-input.html" class="nav-item">
+                    <div class="nav-item-icon">6</div>
+                    Input
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="content-card">
+                <h1 class="page-title">C++ Data Types</h1>
+
+                <div class="content-section">
+                    <h2 class="section-title">Understanding Data Types in C++</h2>
+                    <p class="content-text">
+                        Data types in C++ specify the type of data a variable can store and how much memory it will occupy. The right choice of data type can impact program performance and memory usage. C++ offers a rich set of built-in data types to handle various kinds of data efficiently.
+                    </p>
+                    <p class="content-text">
+                        Data types in C++ can be broadly categorized into:
+                    </p>
+                    <ul class="content-text">
+                        <li><strong>Primitive or Basic data types:</strong> Built-in types that represent basic values</li>
+                        <li><strong>Derived data types:</strong> Built from primitive data types (arrays, pointers, references)</li>
+                        <li><strong>User-defined data types:</strong> Created by the programmer (structures, classes, enumerations)</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Primary Data Types</h2>
+                    <p class="content-text">
+                        C++ provides several primary data types that form the foundation of all other data types:
+                    </p>
+
+                    <table class="data-type-table">
+                        <thead>
+                            <tr>
+                                <th>Data Type</th>
+                                <th>Description</th>
+                                <th>Size (typical)</th>
+                                <th>Range (typical)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>int</code></td>
+                                <td>Integer values</td>
+                                <td>4 bytes</td>
+                                <td>-2,147,483,648 to 2,147,483,647</td>
+                            </tr>
+                            <tr>
+                                <td><code>float</code></td>
+                                <td>Single precision floating-point</td>
+                                <td>4 bytes</td>
+                                <td>±3.4e38 (7 decimal digits precision)</td>
+                            </tr>
+                            <tr>
+                                <td><code>double</code></td>
+                                <td>Double precision floating-point</td>
+                                <td>8 bytes</td>
+                                <td>±1.7e308 (15 decimal digits precision)</td>
+                            </tr>
+                            <tr>
+                                <td><code>char</code></td>
+                                <td>Single character</td>
+                                <td>1 byte</td>
+                                <td>-128 to 127 or 0 to 255</td>
+                            </tr>
+                            <tr>
+                                <td><code>bool</code></td>
+                                <td>Boolean values (true/false)</td>
+                                <td>1 byte</td>
+                                <td>true or false</td>
+                            </tr>
+                            <tr>
+                                <td><code>void</code></td>
+                                <td>Valueless, used for functions that return nothing</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="content-text">
+                        The exact size of data types might vary depending on the compiler and the system architecture.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Integer Types</h2>
+                    <p class="content-text">
+                        C++ offers several integer types with different sizes to accommodate various ranges of values:
+                    </p>
+                    
+                    <div class="example-box">
+                        <div class="example-title">Example: Integer Types</div>
+                        <div class="code-block">
+                            // Different integer types
+                            short int smallNumber = 32767;              // 2 bytes: -32,768 to 32,767
+                            int standardNumber = 2000000000;            // 4 bytes: -2,147,483,648 to 2,147,483,647
+                            long int largeNumber = 2147483647L;         // At least 4 bytes
+                            long long int veryLargeNumber = 9223372036854775807LL; // 8 bytes: ±9.2e18
+                            
+                            // Unsigned versions (can only store non-negative values)
+                            unsigned short int positiveSmall = 65535;   // 2 bytes: 0 to 65,535
+                            unsigned int positiveStandard = 4000000000U; // 4 bytes: 0 to 4,294,967,295
+                            unsigned long int positiveLarge = 4294967295UL; // At least 4 bytes
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        You can use the <code>sizeof()</code> operator to determine the exact size of a data type on your system:
+                    </p>
+
+                    <div class="code-block">
+                        cout << "Size of int: " << sizeof(int) << " bytes" << endl;
+                        cout << "Size of long int: " << sizeof(long int) << " bytes" << endl;
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Floating-Point Types</h2>
+                    <p class="content-text">
+                        Floating-point types are used to represent real numbers with decimal points:
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Floating-Point Types</div>
+                        <div class="code-block">
+                            float singlePrecision = 3.14159f;           // Requires 'f' suffix, 7 digits precision
+                            double doublePrecision = 3.141592653589793; // 15 digits precision
+                            long double extendedPrecision = 3.141592653589793238L; // Requires 'L' suffix, 19+ digits precision
+                            
+                            // Scientific notation
+                            double scientificNotation = 6.02e23;        // 6.02 × 10²³ (Avogadro's number)
+                            double verySmallNumber = 1.6e-19;           // 1.6 × 10⁻¹⁹ (elementary charge)
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        Choose <code>double</code> over <code>float</code> when precision is important. Always be aware of potential precision errors in floating-point calculations.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Character Types</h2>
+                    <p class="content-text">
+                        Character types store single characters or sequences of characters:
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Character Types</div>
+                        <div class="code-block">
+                            char singleCharacter = 'A';              // Single character in single quotes
+                            char newline = '\n';                     // Escape sequence for newline
+                            char tab = '\t';                         // Escape sequence for tab
+                            
+                            // C-style strings (character arrays)
+                            char greeting[] = "Hello, World!";       // Null-terminated character array
+                            
+                            // C++ string class (recommended over C-style strings)
+                            #include <string>
+                            std::string modernString = "C++ strings are easier to work with";
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        In C++, the <code>char</code> type can be signed or unsigned, depending on the compiler. If you need specific behavior, you can explicitly use <code>signed char</code> or <code>unsigned char</code>.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Boolean Type</h2>
+                    <p class="content-text">
+                        The <code>bool</code> data type represents logical values that can be either <code>true</code> or <code>false</code>:
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Boolean Type</div>
+                        <div class="code-block">
+                            bool isReady = true;                    // Boolean variable initialized to true
+                            bool hasCompleted = false;              // Boolean variable initialized to false
+                            
+                            // Booleans in conditions
+                            if(isReady) {
+                                cout << "Ready to proceed!" << endl;
+                            }
+                            
+                            // Boolean results from comparisons
+                            int x = 10;
+                            bool isPositive = x > 0;               // isPositive will be true
+                            bool isEven = (x % 2 == 0);            // isEven will be true
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        When printed, boolean values typically display as 1 (true) or 0 (false). To display "true" or "false" as text, you can use:
+                    </p>
+
+                    <div class="code-block">
+                        cout << boolalpha << isReady << endl;       // Prints "true" instead of 1
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Type Modifiers</h2>
+                    <p class="content-text">
+                        C++ provides type modifiers that can be applied to basic data types to alter their characteristics:
+                    </p>
+                    <ul class="content-text">
+                        <li><strong>signed:</strong> Can represent both positive and negative values (default for most types)</li>
+                        <li><strong>unsigned:</strong> Can only represent non-negative values, but has a larger positive range</li>
+                        <li><strong>short:</strong> Reduces the size of the data type</li>
+                        <li><strong>long:</strong> Increases the size of the data type</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Type Modifiers</div>
+                        <div class="code-block">
+                            signed int negative = -42;              // Can hold negative values
+                            unsigned int positive = 42;             // Cannot hold negative values
+                            
+                            short int small = 123;                  // Uses less memory
+                            long int large = 1234567890L;           // Can hold larger values
+                            long double precise = 3.14159265358979323846L;  // Higher precision
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Type Conversion</h2>
+                    <p class="content-text">
+                        C++ allows conversion between different data types either implicitly or explicitly:
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Type Conversion</div>
+                        <div class="code-block">
+                            // Implicit conversion (automatic)
+                            int intValue = 42;
+                            double doubleValue = intValue;         // int to double (safe, no data loss)
+                            
+                            // Explicit conversion (casting)
+                            double pi = 3.14159;
+                            int roundedPi = static_cast<int>(pi);  // Modern C++ cast (will truncate to 3)
+                            
+                            // C-style casting (still works but not recommended)
+                            int oldCastResult = (int)pi;
+                            
+                            // Potential data loss
+                            int largeNumber = 1000000;
+                            short smallType = static_cast<short>(largeNumber);  // Might cause data loss
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        Always be cautious with type conversions that might result in data loss or unexpected behavior.
+                    </p>
+                </div>
+
+                <div class="takeaways-box">
+                    <div class="takeaways-title">Key Takeaways</div>
+                    <ul class="takeaways-list">
+                        <li class="takeaway-item">C++ offers a variety of data types to efficiently store different kinds of values.</li>
+                        <li class="takeaway-item">Choose the appropriate data type based on the range of values you need to represent.</li>
+                        <li class="takeaway-item">Use <code>int</code> for whole numbers, <code>double</code> for decimal numbers, <code>char</code> for single characters, and <code>bool

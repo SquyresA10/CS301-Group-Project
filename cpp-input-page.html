@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C++ Input - Programming Foundations | CodingCompanion</title>
+  <style>
+    /*Reset and Base Styles*/
+    *{
+      margin:0;
+      padding:0;
+      box-sizing: border-box;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    body {
+        background-color: #f0f2f5;
+        color:#1e293b;  
+        line-height: 1.6;
+    }
+
+    /*Navigation Bar*/
+    .navbar{
+      display:flex;
+      justify-content:space-between;
+      align-items: center;
+      padding: 15px 25px;
+      background-color:#1a365d;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0, 0.1);
+      position:relative;
+    }
+
+    .logo{
+      display:flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: white;
+    }
+
+    .logo-icon{
+      width:32px;
+      height:32px;
+      background-color: #4299e1;
+      font-size: 18px;
+      font-weight:800 ;
+      margin-right: 10px;
+      border-radius:8px;
+      display:flex;
+      align-items:center ;
+      justify-content: center;
+    }
+
+    .menu-button{
+      background: rgba(255,255,255, 0.1);
+      border:none;
+      font-size: 16px;
+      font-weight: 500;
+      color:white;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      padding:8px 15px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    .menu-button:hover{
+      background: rgba(255,255,255, 0.2);
+    }
+
+    .menu-button:after{
+      content:"\203A"; /*Unicode for right angle bracket*/
+      font-size: 18px;
+      transform:rotate(90deg);
+      display:inline-block;
+      margin-left: 8px;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .action-button{
+      background: none;
+      border:none;
+      font-size: 18px;
+      color:white;
+      cursor:pointer;
+      width: 35px;
+      height: 35px;
+      display:flex;
+      align-items:center;
+      justify-content: center;
+      transition: background-color 0.2s
+    }
+    .action-button:hover{
+      background: rgba(255,255,255, 0.1);
+    }
+
+    .profile-icon{
+      width:40px;
+      height: 40px;
+      background-color: #4299e1;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor: pointer;
+      font-weight:bold;
+      font-size:16px;
+    }
+
+    /* Main Layout with Sidebar */
+    .layout-container{
+      display:flex;
+      max-width:1200px;
+      margin: 25px auto;
+      gap: 25px;
+      padding: 0 20px;
+    }
+    .sidebar{
+      width:240px;
+      flex-shrink: 0;
+    }
+    .main-content{
+      flex-grow:1;
+    }
+
+    /* Navigation Menu */
+    .nav-menu {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 25px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .nav-item:not(:last-child) {
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    .nav-item:hover {
+      background-color: #f8fafc;
+      color: #4299e1;
+    }
+
+    .nav-item.active {
+      background-color: #ebf8ff;
+      color: #3182ce;
+      font-weight: 600;
+    }
+
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: #3182ce;
+    }
+
+    .nav-item-icon {
+      margin-right: 15px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    /* Topic Menu Title */
+    .topic-menu-title {
+      padding: 15px 20px;
+      font-weight: 700;
+      color: #2d3748;
+      border-bottom: 1px solid #edf2f7;
+      background-color: #f8fafc;
+    }
+
+    /* Content Styling */
+    .content-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      position: relative;
+      overflow:hidden;
+    }
+
+    .content-card::before{
+      content: '';
+      position:absolute;
+      top:0;
+      left:0;
+      right: 0;
+      height:5px;
+      background:linear-gradient(to right,#4299e1,#805ad5)
+    }
+
+    .page-title {
+      font-size: 28px;
+      color: #2d3748;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #edf2f7;
+      padding-bottom: 15px;
+    }
+
+    .content-section {
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      color: #2d3748;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .content-text {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #4a5568;
+    }
+
+    /* Code Blocks */
+    .code-block {
+      background-color: #2d3748;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      margin: 20px 0;
+      position: relative;
+      overflow-x: auto;
+    }
+
+    .code-title {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #4299e1;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 0 8px 0 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Example and Output Boxes */
+    .example-box {
+      background-color: #f8fafc;
+      border-left: 4px solid #4299e1;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .example-title {
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 10px;
+    }
+
+    .output-box {
+      background-color: #f0f9ff;
+      border-left: 4px solid #90cdf4;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    .output-title {
+      font-weight: 600;
+      color: #3182ce;
+      margin-bottom: 10px;
+    }
+
+    /* Navigation Buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+
+    .nav-btn {
+      padding: 10px 20px;
+      background-color: #edf2f7;
+      color: #4a5568;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-btn:hover {
+      background-color: #e2e8f0;
+    }
+
+    .prev-btn::before {
+      content: "←";
+      margin-right: 8px;
+    }
+
+    .next-btn::after {
+      content: "→";
+      margin-left: 8px;
+    }
+
+    /* Key Takeaways Box */
+    .takeaways-box {
+      background-color: #fffbeb;
+      border-left: 4px solid #f6ad55;
+      padding: 20px;
+      margin: 30px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .takeaways-title {
+      font-weight: 600;
+      color: #c05621;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .takeaways-title::before {
+      content: "💡";
+      margin-right: 10px;
+    }
+
+    .takeaways-list {
+      margin-left: 25px;
+    }
+
+    .takeaway-item {
+      margin-bottom: 10px;
+    }
+
+    /* Practice and Challenge Sections */
+    .practice-section {
+      background-color: #ebf8ff;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    .practice-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2c5282;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .practice-title::before {
+      content: "✏️";
+      margin-right: 10px;
+    }
+
+    .task-list {
+      margin-left: 25px;
+    }
+
+    .task-item {
+      margin-bottom: 12px;
+    }
+
+    .challenge-section {
+      background-color: #f0fff4;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+      border-left: 4px solid #48bb78;
+    }
+
+    .challenge-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #276749;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .challenge-title::before {
+      content: "🏆";
+      margin-right: 10px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Mobile Navigation Menu */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .mobile-nav-items {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      color: #4a5568;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .mobile-nav-icon {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    /* Media Queries */
+    @media (max-width: 992px) {
+      .layout-container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      
+      .nav-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      
+      .nav-item {
+        flex: 1 0 30%;
+        justify-content: center;
+        text-align: center;
+        border-bottom: none;
+        border-right: 1px solid #edf2f7;
+        margin-bottom: 1px;
+      }
+      
+      .nav-item-icon {
+        margin-right: 8px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content-card {
+        padding: 20px;
+      }
+
+      .page-title {
+        font-size: 24px;
+      }
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      .nav-item {
+        flex: 1 0 45%;
+      }
+      
+      .menu-button {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+      
+      body {
+        padding-bottom: 60px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .navbar {
+        padding: 10px 15px;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .menu-container {
+        display: none;
+      }
+      
+      .nav-actions {
+        gap: 10px;
+      }
+      
+      .layout-container {
+        padding: 0 10px;
+        margin: 15px auto;
+      }
+      
+      .content-card {
+        padding: 15px;
+      }
+      
+      .page-title {
+        font-size: 20px;
+      }
+
+      .nav-item {
+        flex: 1 0 100%;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-btn {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon">C</div>
+      CodingCompanion
+    </div>
+    <button class="mobile-menu-toggle">☰</button>
+    <div class="menu-container">
+      <button class="menu-button">Explore</button>
+    </div>
+    <div class="nav-actions">
+      <button class="action-button">🔍</button>
+      <button class="action-button">🔔</button>
+      <div class="profile-icon">CP</div>
+    </div>
+  </nav>
+
+  <!-- Main Layout with Sidebar -->
+  <div class="layout-container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <!-- Main Navigation Menu -->
+      <div class="nav-menu">
+        <a href="#" class="nav-item">
+          <div class="nav-item-icon">📊</div>
+          Dashboard
+        </a>
+        <a href="#" class="nav-item active">
+          <div class="nav-item-icon">📚</div>
+          Learning Hub
+        </a>
+        <a href="#" class="nav-item">
+          <div class="nav-item-icon">🗂️</div>
+          Resources
+        </a>
+        <a href="#" class="nav-item">
+          <div class="nav-item-icon">🏅</div>
+          Achievements
+        </a>
+        <a href="#" class="nav-item">
+          <div class="nav-item-icon">⚙️</div>
+          Settings
+        </a>
+      </div>
+
+      <!-- Topics Navigation Menu -->
+      <div class="nav-menu">
+        <div class="topic-menu-title">C++ Fundamentals</div>
+        <a href="cpp-syntax.html" class="nav-item">
+          <div class="nav-item-icon">1</div>
+          Syntax
+        </a>
+        <a href="cpp-comments.html" class="nav-item">
+          <div class="nav-item-icon">2</div>
+          Comments
+        </a>
+        <a href="cpp-data-types.html" class="nav-item">
+          <div class="nav-item-icon">3</div>
+          Data Types
+        </a>
+        <a href="cpp-operators.html" class="nav-item">
+          <div class="nav-item-icon">4</div>
+          Operators
+        </a>
+        <a href="cpp-output.html" class="nav-item">
+          <div class="nav-item-icon">5</div>
+          Output
+        </a>
+        <a href="cpp-input.html" class="nav-item active">
+          <div class="nav-item-icon">6</div>
+          Input
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <div class="content-card">
+        <h1 class="page-title">C++ Input</h1>
+
+        <div class="content-section">
+          <h2 class="section-title">Understanding Input in C++</h2>
+          <p class="content-text">
+            Input is a fundamental concept in programming that allows your program to receive data from users or external sources. In C++, there are multiple ways to accept input, with the most common being through the standard input stream (cin).
+          </p>
+          <p class="content-text">
+            Mastering input operations is essential for creating interactive programs that can respond to user actions and process different types of data effectively.
+          </p>
+        </div>
+
+        <div class="content-section">
+          <h2 class="section-title">Basic Input with cin</h2>
+          <p class="content-text">
+            The most common way to receive input in C++ is using the <strong>cin</strong> object, which stands for "console input." It's part of the iostream library and works with the extraction operator (<strong>>></strong>) to read data from the standard input stream.
+          </p>
+
+          <div class="example-box">
+            <div class="example-title">Example: Basic Input with cin</div>
+            <div class="code-block">
+              #include <iostream>
+using namespace std;
+
+int main() {
+    int age;
+    
+    cout << "Enter your age: ";
+    cin >> age;
+    
+    cout << "Your age is: " << age << endl;
+    
+    return 0;
+}
+            </div>
+          </div>
+
+          <div class="output-box">
+            <div class="output-title">Sample Output</div>
+            Enter your age: 25
+            Your age is: 25
+          </div>
+
+          <p class="content-text">
+            In this example, the program prompts the user to enter their age, waits for input, stores the entered value in the <strong>age</strong> variable, and then displays it back to the user.
+          </p>
+        </div>
+
+        <div class="content-section">
+          <h2 class="section-title">Reading Different Data Types</h2>
+          <p class="content-text">
+            C++ allows you to read different types of data using cin. The extraction operator automatically converts the input to the appropriate data type based on the variable used.
+          </p>
+
+          <div class="example-box">
+            <div class="example-title">Example: Reading Different Data Types</div>
+            <div class="code-block">
+              #include <iostream>
+using namespace std;
+
+int main() {
+    int id;
+    double salary;
+    char grade;
+    string name;
+    
+    cout << "Enter your ID: ";
+    cin >> id;
+    
+    cout << "Enter your salary: ";
+    cin >> salary;
+    
+    cout << "Enter your grade (A, B, C, D, or F): ";
+    cin >> grade;
+    
+    cout << "Enter your full name: ";
+    cin.ignore(); // Clear the input buffer
+    getline(cin, name); // Read the entire line for the name
+    
+    // Display the entered values
+    cout << "\nYour details:" << endl;
+    cout << "ID: " << id << endl;
+    cout << "Salary: $" << salary << endl;
+    cout << "Grade: " << grade << endl;
+    cout << "Name: " << name << endl;
+    
+    return 0;
+}
+            </div>
+          </div>
+
+          <p class="content-text">
+            This example demonstrates how to read an integer (id), a double (salary), a character (grade), and a string (name). Notice that for reading a string that might contain spaces, we use <strong>getline()</strong> instead of cin.
+          </p>
+        </div>
+
+        <div class="content-section">
+          <h2 class="section-title">Reading Multiple Values at Once</h2>
+          <p class="content-text">
+            C++ allows you to read multiple values in a single line by chaining multiple extraction operators:
+          </p>
+
+          <div class="example-box">
+            <div class="example-title">Example: Reading Multiple Values</div>
+            <div class="code-block">
+              #include <iostream>
+using namespace std;
+
+int main() {
+    int length, width, height;
+    
+    cout << "Enter the length, width, and height separated by spaces: ";
+    cin >> length >> width >> height;
+    
+    int volume = length * width * height;
+    
+    cout << "The volume is: " << volume << " cubic units" << endl;
+    
+    return 0;
+}
+            </div>
+          </div>
+
+          <div class="output-box">
+            <div class="output-title">Sample Output</div>
+            Enter the length, width, and height separated by spaces: 5 4 3
+            The volume is: 60 cubic units
+          </div>
+
+          <p class="content-text">
+            In this example, the user can enter three values separated by spaces, and cin will automatically assign them to the respective variables in the order specified.
+          </p>
+        </div>
+
+        <div class="content-section">
+          <h2 class="section-title">Reading Strings with Spaces</h2>
+          <p class="content-text">
+            When reading text input that contains spaces, the standard cin with extraction operator will only read until it encounters a space. To read an entire line, including spaces, you should use the <strong>getline()</strong> function:
+          </p>
+
+          <div class="example-box">
+            <div class="example-title">Example: Reading Strings with Spaces</div>
+            <div class="code-block">
+              #include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string fullName;
+    
+    cout << "Enter your full name: ";
+    getline(cin, fullName);
+    
+    cout << "Hello, " << fullName << "!" << endl;
+    
+    return 0;
+}
+            </div>
+          </div>
+
+          <div class="output-box">
+            <div class="output-title">Sample Output</div>
+            Enter your full name: John Smith
+            Hello, John Smith!
+          </div>
+
+          <p class="content-text">
+            The <strong>getline()</strong> function reads input until it encounters a newline character, allowing it to capture spaces within the input string.
+          </p>
+        </div>
+
+        <div class="content-section">
+          <h2 class="section-title">Input Stream States and Validation</h2>
+          <p class="content-text">
+            When reading input, it's important to check if the input operation was successful. Input can fail for various reasons, such as when the user enters a value of the wrong type. C++ provides several stream state flags to help with validation:
+          </p>
+
+          <div class="example-box">
+            <div class="example-title">Example: Input Validation</div>
+            <div class="code-block">
+              #include <iostream>
+using namespace std;
+
+int main() {
+    int age;
+    
+    cout << "Enter your age: ";
+    cin >> age;
+    
+    if (cin.fail()) {
+        cout << "Invalid input. Please enter a number." << endl;
+        // Clear the error state
+        cin.clear();
+        // Discard invalid input
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    } else if (age < 0 || age > 120) {
+        cout << "Please enter a valid age between 0 and 120." << endl;
+    } else {
+        cout << "Your age is: " << age << endl;
+    }
+    
+    return 0;
+}
+            </div>
+          </div>
+
+          <p class="content-text">
+            This example demonstrates how to check if the input operation failed (using <strong>cin.fail()</strong>) and how to handle invalid input by clearing the error state and discarding the invalid input.
+          </p>
+        </div>
+
+        <div class="content-section">
+          <h2 class="section-title">File Input in C++</h2>
+          <p class="content-text">
+            Besides reading from the console, C++ also provides functionality to read input from files using <strong>ifstream</strong> (input file stream):
+          </p>
+
+          <div class="example-box">
+            <div class="example-title">Example: Reading from a File</div>
+            <div class="code-block">
+              #include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+    ifstream inputFile("data.txt");
+    
+    if (!inputFile) {
+        cout << "Error opening file." << endl;
+        return 1;
+    }
+    
+    string line;
+    while (getline(inputFile, line)) {
+        cout << line << endl;
+    }
+    
+    inputFile.close();
+    
+    return 0;
+}
+            </div>
+          </div>
+
+          <p class="content-text">
+            This example opens a file named "data.txt," reads it line by line using <strong>getline()</strong>, and displays each line to the console. The file is closed after reading is complete.
+          </p>
+        </div>
+
+        <div class="takeaways-box">
+          <div class="takeaways-title">Key Takeaways</div>
+          <ul class="takeaways-list">
+            <li class="takeaway-item">C++ uses <strong>cin</strong> and the extraction operator (<strong>>></strong>) for basic input operations.</li>
+            <li class="takeaway-item">Different data types can be read using the same syntax, as cin automatically converts the input to the appropriate type.</li>
+            <li class="takeaway-item">For reading strings with spaces, use <strong>getline()</strong> instead of the standard extraction operator.</li>
+            <li class="takeaway-item">Input validation is important to ensure your program handles unexpected or invalid input gracefully.</li>
+            <li class="takeaway-item">C++ provides <strong>ifstream</strong> for reading data from files, following similar patterns to console input.</li>
+          </ul>
+        </div>
+
+        <div class="practice-section">
+          <div class="practice-title">Practice Exercises</div>
+          <ol class="task-list">
+            <li class="task-item">Create a program that asks the user to enter their first name, last name, and age, then displays a greeting message that includes all the information.</li>
+            <li class="task-item">Write a program that reads five integers from the user and computes their sum and average.</li>
+            <li class="task-item">Develop a simple calculator program that reads two numbers and an operator (+, -, *, /) from the user, then performs the corresponding operation and displays the result.</li>
+          </ol>
+        </div>
+
+        <div class="challenge-section">
+          <div class="challenge-title">Code Challenge</div>
+          <p class="content-text">
+            Create a student record management program that:
+          </p>
+          <ol class="task-list">
+            <li class="task-item">Asks the user to input details for at least three students (name, ID, and GPA)</li>
+            <li class="task-item">Validates that the GPA is between 0.0 and 4.0</li>
+            <li class="task-item">Displays a formatted table showing all student records</li>
+            <li class="task-item">Calculates and displays the average GPA of all students</li>
+            <li class="task-item">Identifies and displays the student with the highest GPA</li>
+          </ol>
+        </div>
+
+        <div class="nav-buttons">
+          <a href="cpp-output.html" class="nav-btn prev-btn">Output</a>
+          <a href="cpp-variables.html" class="nav-btn next-btn">Variables</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div class="mobile-nav">
+    <div class="mobile-nav-items">
+      <a href="#" class="mobile-nav-item">
+        <div class="mobile-nav-icon">📊</div>
+        Dashboard
+      </a>
+      <a href="#" class="mobile-nav-item">
+        <div class="mobile-nav-icon">📚</div>
+        Learn
+      </a>
+      <a href="#" class="mobile-nav-item">
+        <div class="mobile-nav-icon">🗂️</div>
+        Resources
+      </a>
+      <a href="#" class="mobile-nav-item">
+        <div class="mobile-nav-icon">👤</div>
+        Profile
+      </a>
+    </div>
+  </div>
+</body>
+</html>

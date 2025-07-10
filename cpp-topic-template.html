@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Syntax - Programming Foundations | CodeMentor</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background-color: #1a365d;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            background-color: #4299e1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .menu-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-button:after {
+            content: "\203A";
+            transform: rotate(90deg);
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 18px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .action-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .action-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4299e1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Main Container with Sidebar Layout */
+        .layout-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 25px auto;
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            width: 240px;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex-grow: 1;
+        }
+
+        /* Navigation Menu with Visual Indicators */
+        .nav-menu {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .nav-item:not(:last-child) {
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .nav-item:hover {
+            background-color: #f8fafc;
+            color: #4299e1;
+        }
+
+        .nav-item.active {
+            background-color: #ebf8ff;
+            color: #3182ce;
+            font-weight: 600;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #3182ce;
+        }
+
+        .nav-item-icon {
+            margin-right: 15px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* Topics Menu */
+        .topic-menu-title {
+            padding: 15px 20px;
+            font-weight: 700;
+            color: #2d3748;
+            border-bottom: 1px solid #edf2f7;
+            background-color: #f8fafc;
+        }
+
+        /* Content Styling */
+        .content-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-title {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 15px;
+        }
+
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .content-text {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #4a5568;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-title {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #4299e1;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 0 8px 0 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Example and Output Boxes */
+        .example-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #4299e1;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .output-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid #90cdf4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .output-title {
+            font-weight: 600;
+            color: #3182ce;
+            margin-bottom: 10px;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background-color: #edf2f7;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        .prev-btn::before {
+            content: "←";
+            margin-right: 8px;
+        }
+
+        .next-btn::after {
+            content: "→";
+            margin-left: 8px;
+        }
+
+        /* Practice Exercise Section */
+        .practice-section {
+            background-color: #ebf8ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .practice-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .practice-title::before {
+            content: "✏️";
+            margin-right: 10px;
+        }
+
+        .task-list {
+            margin-left: 25px;
+        }
+
+        .task-item {
+            margin-bottom: 12px;
+        }
+
+        /* Challenge Section */
+        .challenge-section {
+            background-color: #f0fff4;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 4px solid #48bb78;
+        }
+
+        .challenge-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #276749;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .challenge-title::before {
+            content: "🏆";
+            margin-right: 10px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Mobile Navigation Menu */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        /* Key Takeaways Box */
+        .takeaways-box {
+            background-color: #fffbeb;
+            border-left: 4px solid #f6ad55;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .takeaways-title {
+            font-weight: 600;
+            color: #c05621;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .takeaways-title::before {
+            content: "💡";
+            margin-right: 10px;
+        }
+
+        .takeaways-list {
+            margin-left: 25px;
+        }
+
+        .takeaway-item {
+            margin-bottom: 10px;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 992px) {
+            .layout-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .topic-nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .nav-item {
+                flex: 1 0 30%;
+                justify-content: center;
+                text-align: center;
+                border-bottom: none;
+                border-right: 1px solid #edf2f7;
+                margin-bottom: 1px;
+            }
+            
+            .nav-item-icon {
+                margin-right: 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .nav-item {
+                flex: 1 0 45%;
+            }
+            
+            .menu-button {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+            
+            body {
+                padding-bottom: 60px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .menu-container {
+                display: none;
+            }
+            
+            .nav-actions {
+                gap: 10px;
+            }
+            
+            .layout-container {
+                padding: 0 10px;
+                margin: 15px auto;
+            }
+            
+            .content-card {
+                padding: 15px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+            }
+
+            .nav-item {
+                flex: 1 0 100%;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">C</div>
+            CodeMentor
+        </div>
+        <button class="mobile-menu-toggle">☰</button>
+        <div class="menu-container">
+            <button class="menu-button">Explore</button>
+        </div>
+        <div class="nav-actions">
+            <button class="action-button">🔍</button>
+            <button class="action-button">🔔</button>
+            <div class="profile-icon">AM</div>
+        </div>
+    </nav>
+
+    <!-- Main Layout with Sidebar -->
+    <div class="layout-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- Main Navigation Menu -->
+            <div class="nav-menu">
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">📊</div>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item active">
+                    <div class="nav-item-icon">📚</div>
+                    Learning Hub
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🗂️</div>
+                    Resources
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">🏅</div>
+                    Achievements
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-item-icon">⚙️</div>
+                    Settings
+                </a>
+            </div>
+
+            <!-- Topics Navigation Menu -->
+            <div class="nav-menu topic-nav">
+                <div class="topic-menu-title">C++ Fundamentals</div>
+                <a href="cpp-syntax.html" class="nav-item active">
+                    <div class="nav-item-icon">1</div>
+                    Syntax
+                </a>
+                <a href="cpp-comments.html" class="nav-item">
+                    <div class="nav-item-icon">2</div>
+                    Comments
+                </a>
+                <a href="cpp-data-types.html" class="nav-item">
+                    <div class="nav-item-icon">3</div>
+                    Data Types
+                </a>
+                <a href="cpp-operators.html" class="nav-item">
+                    <div class="nav-item-icon">4</div>
+                    Operators
+                </a>
+                <a href="cpp-output.html" class="nav-item">
+                    <div class="nav-item-icon">5</div>
+                    Output
+                </a>
+                <a href="cpp-input.html" class="nav-item">
+                    <div class="nav-item-icon">6</div>
+                    Input
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="content-card">
+                <h1 class="page-title">C++ Syntax</h1>
+
+                <div class="content-section">
+                    <h2 class="section-title">Introduction to C++ Syntax</h2>
+                    <p class="content-text">
+                        C++ syntax refers to the set of rules that define how C++ programs are written and interpreted. Learning the correct syntax is essential to writing functional code. In this lesson, we'll cover the basic structure of a C++ program and the fundamental syntax rules you need to know.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Basic Structure of a C++ Program</h2>
+                    <p class="content-text">
+                        Every C++ program follows a specific structure. At its most basic level, a C++ program consists of:
+                    </p>
+
+                    <div class="code-block">
+                        <div class="code-title">C++</div>
+                        #include <iostream>
+using namespace std;
+
+int main() {
+    // Your code goes here
+    cout << "Hello, World!";
+    return 0;
+}
+                    </div>
+
+                    <p class="content-text">
+                        Let's break down this program structure:
+                    </p>
+                    <ul class="content-text">
+                        <li><strong>#include &lt;iostream&gt;</strong>: This is a preprocessor directive that includes the input/output stream library.</li>
+                        <li><strong>using namespace std;</strong>: This statement allows us to use names for objects and variables from the standard library.</li>
+                        <li><strong>int main()</strong>: The main function is the entry point of any C++ program. Execution begins from this function.</li>
+                        <li><strong>{ }</strong>: Curly braces define a block of code.</li>
+                        <li><strong>cout &lt;&lt; "Hello, World!";</strong>: This statement outputs "Hello, World!" to the console.</li>
+                        <li><strong>return 0;</strong>: This statement terminates the main function and returns a value (0) to the operating system.</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Statements and Semicolons</h2>
+                    <p class="content-text">
+                        In C++, statements are instructions that perform specific actions. Each statement must end with a semicolon (;).
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: C++ Statements</div>
+                        <div class="code-block">
+                            int x = 5;           // Declaration and initialization
+                            x = x + 10;          // Assignment
+                            cout << x;           // Output
+                            return 0;            // Return statement
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        Forgetting a semicolon is a common syntax error that will prevent your program from compiling.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">C++ Case Sensitivity</h2>
+                    <p class="content-text">
+                        C++ is case-sensitive, which means uppercase and lowercase letters are considered different characters. For example, <code>myVariable</code>, <code>myvariable</code>, and <code>MYVARIABLE</code> would be three different variables.
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Case Sensitivity</div>
+                        <div class="code-block">
+                            int age = 25;    // Declares a variable named "age"
+                            int AGE = 30;    // Declares a different variable named "AGE"
+                            
+                            cout << age;     // Outputs 25
+                            cout << AGE;     // Outputs 30
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Whitespace in C++</h2>
+                    <p class="content-text">
+                        Whitespace refers to spaces, tabs, and newlines in your code. C++ generally ignores whitespace, which means you can format your code for readability without affecting its functionality.
+                    </p>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Whitespace Usage</div>
+                        <div class="code-block">
+                            // These two statements are equivalent
+                            int sum=x+y;
+                            int sum = x + y;
+                            
+                            // These blocks are also equivalent
+                            if(x>5){cout<<"Greater than 5";}
+                            
+                            if (x > 5) {
+                                cout << "Greater than 5";
+                            }
+                        </div>
+                    </div>
+
+                    <p class="content-text">
+                        While the compiler ignores most whitespace, using it properly makes your code more readable and maintainable.
+                    </p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Identifiers</h2>
+                    <p class="content-text">
+                        Identifiers are names used to identify variables, functions, classes, or other entities in your program. C++ has specific rules for creating valid identifiers:
+                    </p>
+                    <ul class="content-text">
+                        <li>Must begin with a letter (a-z, A-Z) or underscore (_)</li>
+                        <li>Can contain letters, digits (0-9), and underscores</li>
+                        <li>Cannot contain spaces or special characters</li>
+                        <li>Cannot be a reserved keyword</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <div class="example-title">Example: Valid and Invalid Identifiers</div>
+                        <div class="code-block">
+                            // Valid identifiers
+                            int age;
+                            float _value;
+                            string firstName;
+                            double price2;
+                            
+                            // Invalid identifiers
+                            int 2value;      // Cannot start with a number
+                            float user-name; // Cannot contain hyphens
+                            char for;        // Cannot use reserved keywords
+                        </div>
+                    </div>
+                </div>
+
+                <div class="takeaways-box">
+                    <div class="takeaways-title">Key Takeaways</div>
+                    <ul class="takeaways-list">
+                        <li class="takeaway-item">Every C++ program must have a <code>main()</code> function as its entry point.</li>
+                        <li class="takeaway-item">Statements in C++ must end with a semicolon (;).</li>
+                        <li class="takeaway-item">C++ is case-sensitive, so <code>variable</code> and <code>Variable</code> are different.</li>
+                        <li class="takeaway-item">Whitespace is generally ignored by the compiler but improves code readability.</li>
+                        <li class="takeaway-item">Identifiers must follow specific naming rules and cannot use reserved keywords.</li>
+                    </ul>
+                </div>
+
+                <div class="practice-section">
+                    <div class="practice-title">Practice Exercises</div>
+                    <ol class="task-list">
+                        <li class="task-item">Identify and fix the syntax errors in the following code:
+                            <div class="code-block">
+                                #include <iostream>
+using namespace std
+
+int Main() {
+    cout << "Learning C++ syntax"
+    int x = 10
+    return 0
+}
+                            </div>
+                        </li>
+                        <li class="task-item">Write a simple C++ program that creates two variables and performs a calculation on them.</li>
+                        <li class="task-item">List five valid and five invalid identifier names, and explain why each is valid or invalid.</li>
+                    </ol>
+                </div>
+
+                <div class="challenge-section">
+                    <div class="challenge-title">Code Challenge</div>
+                    <p class="content-text">
+                        Create a C++ program that follows proper syntax rules and:
+                    </p>
+                    <ol class="task-list">
+                        <li class="task-item">Declares three different variables with appropriate names</li>
+                        <li class="task-item">Performs at least two different operations with these variables</li>
+                        <li class="task-item">Displays the results using <code>cout</code></li>
+                        <li class="task-item">Uses proper indentation and formatting for readability</li>
+                    </ol>
+                </div>
+
+                <div class="nav-buttons">
+                    <a href="index.html" class="nav-btn prev-btn">Course Home</a>
+                    <a href="cpp-comments.html" class="nav-btn next-btn">Comments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="#" class="mobile-nav-item">
+                <div class="mobile-nav-icon">📊</div>
+                Dashboard
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <div class="mobile-nav-icon">📚</div>
+                Learn
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <div class="mobile-nav-icon">🗂️</div>
+                Resources
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <div class="mobile-nav-icon">👤</div>
+                Profile
+            </a>
+        </div>
+    </div>
+</body>
+</html>
