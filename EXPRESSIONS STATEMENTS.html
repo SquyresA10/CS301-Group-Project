@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expressions & Statements - CodingCompanion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 5px;
+            background: #1a365d;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 70;
+            gap: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 22px;
+            letter-spacing: 1px;
+            color: #2d5bb9;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #4299e1;
+            font-size: 18px;
+            font-weight: 800;
+            margin-right: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            font-size: 14px;
+            color: white;
+            font-weight: 300;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #4299e1;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .main-container {
+            margin-top: 80px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar Navigation */
+        .lesson-sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .lesson-nav-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 10px;
+        }
+
+        .lesson-nav-item {
+            display: block;
+            padding: 12px 15px;
+            color: #64748b;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .lesson-nav-item:hover {
+            background: #f8fafc;
+            color: #4299e1;
+        }
+
+        .lesson-nav-item.active {
+            background: #ebf8ff;
+            color: #3182ce;
+            font-weight: 600;
+        }
+
+        .lesson-nav-item.completed::after {
+            content: "✓";
+            position: absolute;
+            right: 15px;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Progress Bar */
+        .lesson-progress {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .progress-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        .progress-percentage {
+            font-size: 14px;
+            color: #4299e1;
+            font-weight: 600;
+        }
+
+        .progress-bar-container {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4299e1, #805ad5);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        /* Main Content Area */
+        .lesson-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .lesson-title {
+            font-size: 2.5rem;
+            color: #1a365d;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .lesson-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1a365d;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .content-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 20px;
+        }
+
+        /* Code Examples */
+        .code-example {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .code-title {
+            color: #e2e8f0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #3182ce;
+        }
+
+        .code-content {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #e2e8f0;
+            overflow-x: auto;
+        }
+
+        /* Syntax highlighting */
+        .keyword { color: #c792ea; }
+        .string { color: #c3e88d; }
+        .comment { color: #546e7a; font-style: italic; }
+        .number { color: #f78c6c; }
+        .type { color: #82aaff; }
+        .variable { color: #ffcb6b; }
+
+        /* Interactive Code Editor */
+        .interactive-editor {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .editor-header {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-title {
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        .run-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .run-btn:hover {
+            background: #059669;
+        }
+
+        .editor-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .code-input {
+            padding: 20px;
+            border: none;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: none;
+            outline: none;
+            background: #f8fafc;
+            min-height: 200px;
+        }
+
+        .output-panel {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            border-left: 1px solid #e2e8f0;
+            min-height: 200px;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.tip {
+            background: #f0f9ff;
+            border-color: #0ea5e9;
+            color: #0c4a6e;
+        }
+
+        .info-box.warning {
+            background: #fffbeb;
+            border-color: #f59e0b;
+            color: #92400e;
+        }
+
+        .info-box.important {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .quiz-title {
+            font-size: 1.5rem;
+            color: #1a365d;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quiz-question {
+            font-size: 16px;
+            color: #374151;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: #4299e1;
+            background: #f8fafc;
+        }
+
+        .quiz-option.selected {
+            border-color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .quiz-option.correct {
+            border-color: #10b981;
+            background: #dcfce7;
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .quiz-submit {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .quiz-submit:hover {
+            background: #3182ce;
+        }
+
+        .quiz-submit:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .quiz-feedback.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        /* Navigation Buttons */
+        .lesson-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #f1f5f9;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-btn.prev {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .nav-btn.prev:hover {
+            background: #e2e8f0;
+        }
+
+        .nav-btn.next {
+            background: #4299e1;
+            color: white;
+        }
+
+        .nav-btn.next:hover {
+            background: #3182ce;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 10px;
+            }
+
+            .lesson-sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .lesson-title {
+                font-size: 2rem;
+            }
+
+            .lesson-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .editor-content {
+                grid-template-columns: 1fr;
+            }
+
+            .code-input, .output-panel {
+                min-height: 150px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .achievement-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">C++</div>
+            CodingCompanion
+        </div>
+        <nav class="navbar">
+            <a href="enhanced-index.html">Home</a>
+            <a href="enhanced-dashboard.html">Dashboard</a>
+            <a href="#courses">Courses</a>
+            <a href="#progress">Progress</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <!-- Lesson Sidebar -->
+        <aside class="lesson-sidebar">
+            <h3 class="lesson-nav-title">C++ Fundamentals</h3>
+            <a href="#intro" class="lesson-nav-item completed">Introduction to C++</a>
+            <a href="#variables" class="lesson-nav-item completed">Variables & Constants</a>
+            <a href="#datatypes" class="lesson-nav-item completed">Data Types</a>
+            <a href="#operators" class="lesson-nav-item completed">Operators</a>
+            <a href="#expressions" class="lesson-nav-item active">Expressions & Statements</a>
+            <a href="#loops" class="lesson-nav-item">Loops</a>
+            <a href="#functions" class="lesson-nav-item">Functions</a>
+            <a href="#arrays" class="lesson-nav-item">Arrays</a>
+
+            <div class="lesson-progress">
+                <div class="progress-header">
+                    <span class="progress-title">Lesson Progress</span>
+                    <span class="progress-percentage" id="progressText">45%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="lesson-content">
+            <!-- Lesson Header -->
+            <div class="lesson-header">
+                <h1 class="lesson-title">Expressions & Statements</h1>
+                <p class="lesson-subtitle">Learn how to control program flow with conditional statements in C++</p>
+                <div class="lesson-meta">
+                    <div class="meta-item">
+                        <span>⏱️</span>
+                        <span>20 minutes</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📊</span>
+                        <span>Beginner Level</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯</span>
+                        <span>5 Exercises</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Introduction Section -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">📝</span>
+                    Control Flow Basics
+                </h2>
+                <p class="content-text">
+                    Control flow statements allow your program to make decisions and execute different code blocks based on conditions. In C++, the primary control flow statements are <code>if</code>, <code>if-else</code>, and <code>switch</code>. These statements evaluate expressions and determine which code path to follow.
+                </p>
+                
+                <div class="info-box tip">
+                    <div class="info-box-title">
+                        <span>💡</span>
+                        Key Concept
+                    </div>
+                    <p>An expression in C++ is any combination of literals, variables, operators, and function calls that evaluates to a single value. Statements are complete lines of code that perform actions, including control flow statements.</p>
+                </div>
+            </section>
+
+            <!-- If Statement Section -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🔧</span>
+                    The if Statement
+                </h2>
+                <p class="content-text">
+                    The <code>if</code> statement is the simplest form of conditional execution. It evaluates a condition in parentheses, and if the condition is true, the code block following the statement is executed.
+                </p>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span class="code-title">Basic if Statement</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="type">int</span> <span class="variable">age</span> = <span class="number">18</span>;
+
+<span class="keyword">if</span> (<span class="variable">age</span> >= <span class="number">18</span>) {
+    cout << <span class="string">"You are an adult."</span> << endl;
+}</pre>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-title">
+                        <span>⚠️</span>
+                        Important Note
+                    </div>
+                    <p>The condition in an if statement must evaluate to a boolean value (true or false). In C++, any non-zero value is considered true, and zero is considered false.</p>
+                </div>
+            </section>
+
+            <!-- If-Else Section -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🔄</span>
+                    if-else Statements
+                </h2>
+                <p class="content-text">
+                    The <code>if-else</code> statement provides an alternative path of execution when the condition is false. You can also chain multiple conditions using <code>else if</code>.
+                </p>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span class="code-title">if-else Examples</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="comment">// Basic if-else</span>
+<span class="type">int</span> <span class="variable">score</span> = <span class="number">85</span>;
+
+<span class="keyword">if</span> (<span class="variable">score</span> >= <span class="number">90</span>) {
+    cout << <span class="string">"Grade: A"</span> << endl;
+} <span class="keyword">else</span> {
+    cout << <span class="string">"Grade: Not A"</span> << endl;
+}
+
+<span class="comment">// Multiple conditions with else if</span>
+<span class="keyword">if</span> (<span class="variable">score</span> >= <span class="number">90</span>) {
+    cout << <span class="string">"A"</span> << endl;
+} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">score</span> >= <span class="number">80</span>) {
+    cout << <span class="string">"B"</span> << endl;
+} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">score</span> >= <span class="number">70</span>) {
+    cout << <span class="string">"C"</span> << endl;
+} <span class="keyword">else</span> {
+    cout << <span class="string">"F"</span> << endl;
+}</pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Nested If Section -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎯</span>
+                    Nested if Statements
+                </h2>
+                <p class="content-text">
+                    You can place <code>if</code> statements inside other <code>if</code> statements to create more complex decision-making structures. This is called nesting.
+                </p>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span class="code-title">Nested if Example</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="type">int</span> <span class="variable">age</span> = <span class="number">25</span>;
+<span class="type">bool</span> <span class="variable">hasLicense</span> = <span class="keyword">true</span>;
+
+<span class="keyword">if</span> (<span class="variable">age</span> >= <span class="number">18</span>) {
+    cout << <span class="string">"You are old enough to drive."</span> << endl;
+    
+    <span class="keyword">if</span> (<span class="variable">hasLicense</span>) {
+        cout << <span class="string">"You can legally drive!"</span> << endl;
+    } <span class="keyword">else</span> {
+        cout << <span class="string">"But you need a license first."</span> << endl;
+    }
+} <span class="keyword">else</span> {
+    cout << <span class="string">"You are too young to drive."</span> << endl;
+}</pre>
+                    </div>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-title">
+                        <span>💡</span>
+                        Best Practice
+                    </div>
+                    <p>While nesting can be powerful, deep nesting (more than 2-3 levels) can make code hard to read. Consider using functions or logical operators to simplify complex conditions.</p>
+                </div>
+            </section>
+
+            <!-- Interactive Exercise -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">💻</span>
+                    Try It Yourself
+                </h2>
+                <p class="content-text">
+                    Practice writing if-else statements. Try modifying the code below to handle different temperature ranges and click "Run" to see the output:
+                </p>
+
+                <div class="interactive-editor">
+                    <div class="editor-header">
+                        <span class="editor-title">Interactive C++ Editor</span>
+                        <button class="run-btn" onclick="runCode()">Run Code</button>
+                    </div>
+                    <div class="editor-content">
+                        <textarea class="code-input" id="codeInput">#include <iostream>
+using namespace std;
+
+int main() {
+    int temperature = 25; // Try changing this value
+    
+    // Write your if-else statements here
+    if (temperature > 30) {
+        cout << "It's hot outside!" << endl;
+    } else if (temperature > 20) {
+        cout << "It's warm outside." << endl;
+    } else if (temperature > 10) {
+        cout << "It's cool outside." << endl;
+    } else {
+        cout << "It's cold outside!" << endl;
+    }
+    
+    return 0;
+}</textarea>
+                        <div class="output-panel" id="outputPanel">
+Click "Run Code" to see the output...
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Switch Statement Section -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🔀</span>
+                    switch Statements
+                </h2>
+                <p class="content-text">
+                    The <code>switch</code> statement provides an alternative to long <code>if-else</code> chains when you need to compare a variable against multiple constant values. It's often more readable for such cases.
+                </p>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span class="code-title">switch Statement Example</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="type">char</span> <span class="variable">grade</span> = <span class="string">'B'</span>;
+
+<span class="keyword">switch</span> (<span class="variable">grade</span>) {
+    <span class="keyword">case</span> <span class="string">'A'</span>:
+        cout << <span class="string">"Excellent!"</span> << endl;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">'B'</span>:
+        cout << <span class="string">"Good job!"</span> << endl;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">'C'</span>:
+        cout << <span class="string">"Fair."</span> << endl;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">'D'</span>:
+        cout << <span class="string">"Needs improvement."</span> << endl;
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        cout << <span class="string">"Invalid grade."</span> << endl;
+}</pre>
+                    </div>
+                </div>
+
+                <div class="info-box important">
+                    <div class="info-box-title">
+                        <span>🚨</span>
+                        Remember
+                    </div>
+                    <p>Always include <code>break</code> statements at the end of each case block in a switch statement. Without them, execution will "fall through" to the next case, which is rarely what you want (unless intentionally designed that way).</p>
+                </div>
+            </section>
+
+            <!-- Ternary Operator Section -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-icon">❓</span>
+                    Ternary Operator
+                </h2>
+                <p class="content-text">
+                    C++ provides a shorthand conditional operator (<code>?:</code>) that can be used as a concise alternative to simple <code>if-else</code> statements.
+                </p>
+
+                <div class="code-example">
+                    <div class="code-header">
+                        <span class="code-title">Ternary Operator Examples</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="code-content">
+<pre><span class="comment">// Basic ternary operator</span>
+<span class="type">int</span> <span class="variable">age</span> = <span class="number">20</span>;
+<span class="type">string</span> <span class="variable">status</span> = (<span class="variable">age</span> >= <span class="number">18</span>) ? <span class="string">"Adult"</span> : <span class="string">"Minor"</span>;
+
+<span class="comment">// Equivalent to:</span>
+<span class="type">string</span> <span class="variable">status</span>;
+<span class="keyword">if</span> (<span class="variable">age</span> >= <span class="number">18</span>) {
+    <span class="variable">status</span> = <span class="string">"Adult"</span>;
+} <span class="keyword">else</span> {
+    <span class="variable">status</span> = <span class="string">"Minor"</span>;
+}</pre>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-title">
+                        <span>⚠️</span>
+                        Caution
+                    </div>
+                    <p>While the ternary operator can make code more concise, overusing it or nesting multiple ternary operators can make your code harder to read. Use it judiciously for simple conditions.</p>
+                </div>
+            </section>
+
+            <!-- Quiz Section -->
+            <section class="quiz-section">
+                <h2 class="quiz-title">🧠 Test Your Knowledge</h2>
+                <div class="quiz-question">
+                    What will be the output of the following code snippet?
+                    <pre style="background: #f1f5f9; padding: 10px; border-radius: 6px; margin-top: 10px;">int x = 2;
+switch (x) {
+    case 1: cout << "One";
+    case 2: cout << "Two";
+    case 3: cout << "Three";
+    default: cout << "Default";
+}</pre>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this, false)">
+                        <code>"Two"</code>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, false)">
+                        <code>"Two" "Default"</code>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, true)">
+                        <code>"TwoThreeDefault"</code>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, false)">
+                        <code>Compilation Error</code>
+                    </div>
+                </div>
+                <button class="quiz-submit" onclick="submitQuiz()" disabled>Submit Answer</button>
+                <div class="quiz-feedback" id="quizFeedback" style="display: none;"></div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="lesson-navigation">
+                <button class="nav-btn prev" onclick="previousLesson()">
+                    ← Previous: Operators
+                </button>
+                <button class="nav-btn next" onclick="nextLesson()">
+                    Next: Loops →
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Progress tracking
+        let currentProgress = 45;
+        let sectionsCompleted = 4;
+        const totalSections = 7;
+
+        // Initialize progress
+        function updateProgress() {
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            currentProgress = Math.min(100, (sectionsCompleted / totalSections) * 100);
+            progressBar.style.width = currentProgress + '%';
+            progressText.textContent = Math.round(currentProgress) + '%';
+        }
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeContent = button.parentElement.nextElementSibling.textContent;
+            navigator.clipboard.writeText(codeContent).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+
+        // Interactive code runner
+        function runCode() {
+            const code = document.getElementById('codeInput').value;
+            const output = document.getElementById('outputPanel');
+            
+            // Simulate code execution (in a real implementation, this would send to a backend)
+            output.innerHTML = 'Running code...<br><br>';
+            
+            setTimeout(() => {
+                // Simulate output based on the default code
+                if (code.includes('temperature')) {
+                    const tempMatch = code.match(/temperature\s*=\s*(\d+)/);
+                    const temp = tempMatch ? parseInt(tempMatch[1]) : 25;
+                    
+                    let result = '';
+                    if (temp > 30) {
+                        result = "It's hot outside!";
+                    } else if (temp > 20) {
+                        result = "It's warm outside.";
+                    } else if (temp > 10) {
+                        result = "It's cool outside.";
+                    } else {
+                        result = "It's cold outside!";
+                    }
+                    
+                    output.innerHTML = `${result}<br><br>Program executed successfully!`;
+                    
+                    // Mark section as completed
+                    if (sectionsCompleted < 5) {
+                        sectionsCompleted = 5;
+                        updateProgress();
+                        showAchievement("Code Runner", "You successfully ran conditional statements!");
+                    }
+                } else {
+                    output.innerHTML = 'Error: No temperature condition found.<br>Try implementing the temperature conditions!';
+                }
+            }, 1500);
+        }
+
+        // Quiz functionality
+        let selectedOption = null;
+        let quizAnswered = false;
+
+        function selectOption(option, isCorrect) {
+            if (quizAnswered) return;
+            
+            // Remove previous selections
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Select current option
+            option.classList.add('selected');
+            selectedOption = { element: option, correct: isCorrect };
+            
+            // Enable submit button
+            document.querySelector('.quiz-submit').disabled = false;
+        }
+
+        function submitQuiz() {
+            if (!selectedOption || quizAnswered) return;
+            
+            quizAnswered = true;
+            const feedback = document.getElementById('quizFeedback');
+            const submitBtn = document.querySelector('.quiz-submit');
+            
+            // Show correct/incorrect styling
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                if (opt.textContent.includes('"TwoThreeDefault"')) {
+                    opt.classList.add('correct');
+                } else if (opt.classList.contains('selected') && !selectedOption.correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // Show feedback
+            if (selectedOption.correct) {
+                feedback.className = 'quiz-feedback correct';
+                feedback.innerHTML = '🎉 Correct! Without break statements, execution falls through all subsequent cases in a switch statement.';
+                
+                // Update progress
+                if (sectionsCompleted < 7) {
+                    sectionsCompleted = 7;
+                    updateProgress();
+                    showAchievement("Quiz Master", "You answered the quiz correctly!");
+                }
+            } else {
+                feedback.className = 'quiz-feedback incorrect';
+                feedback.innerHTML = '❌ Incorrect. The correct answer is "TwoThreeDefault". In switch statements without break, execution continues through all subsequent cases.';
+            }
+            
+            feedback.style.display = 'block';
+            submitBtn.textContent = 'Quiz Completed';
+            submitBtn.disabled = true;
+        }
+
+        // Navigation functions
+        function previousLesson() {
+            alert('Navigating to: Operators');
+            // In a real app, this would navigate to the previous lesson
+        }
+
+        function nextLesson() {
+            // Mark lesson as completed
+            sectionsCompleted = totalSections;
+            updateProgress();
+            showAchievement("Lesson Complete", "You've completed Expressions & Statements!");
+            
+            setTimeout(() => {
+                alert('Navigating to: Loops');
+                // In a real app, this would navigate to the next lesson
+            }, 2000);
+        }
+
+        // Achievement system
+        function showAchievement(title, description) {
+            const achievement = document.createElement('div');
+            achievement.className = 'achievement-popup';
+            achievement.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 2rem;">🏆</span>
+                    <div>
+                        <strong>${title}</strong>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">${description}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(achievement);
+            
+            setTimeout(() => {
+                achievement.remove();
+            }, 4000);
+        }
+
+        // Scroll tracking for progress
+        function trackScrollProgress() {
+            const sections = document.querySelectorAll('.content-section');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionTop + sectionHeight) {
+                    if (sectionsCompleted <= index + 1) {
+                        sectionsCompleted = index + 1;
+                        updateProgress();
+                    }
+                }
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Add scroll listener for progress tracking
+            window.addEventListener('scroll', trackScrollProgress);
+            
+            // Add entrance animations
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+            
+            // Show welcome message
+            setTimeout(() => {
+                showAchievement("Welcome!", "Let's learn about Expressions & Statements in C++!");
+            }, 1000);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                runCode();
+            }
+        });
+    </script>
+</body>
+</html>
